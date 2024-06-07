@@ -1,0 +1,4 @@
+main_test.c
+*.o
+so_long
+.vscode
