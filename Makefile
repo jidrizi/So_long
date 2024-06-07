@@ -6,39 +6,34 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/06/04 14:09:32 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/06/07 15:20:30 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
- 
-CFLAGS = -Wall -Werror -Wextra
-
-SRC = main_test.c
-
-DEPS = so_long.h 
-
-HEADER = -I ./MLX42/include -I libft/
-
-LIB = -lft -L libft/ -lmlx42 -L ./MLX42/build
-
 LIBMLX = ./MLX42/
-
-OBJS = $(SRC:.c=.o)
-
+CFLAGS = -Wall -Werror -Wextra
+LIB = -lft -L libft/ -lmlx42 -L $(LIBMLX)/build -lglfw
+HEADER = -I $(LIBMLX)/include -I libft/
 
 NAME = so_long
+DEPS = so_long.h 
+SRC = main_test.c
+OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) $(HEADER)
 
-libmlx:
+$(LIBMLX)/build/libmlx42.a:
 	cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-$(NAME): $(OBJS) libmlx
-	$(CC) -o $(NAME) $(OBJS) $(LIB)
+./libft/libft.a:
+	make -C ./libft
+
+$(NAME): $(OBJS) $(LIBMLX)/build/libmlx42.a ./libft/libft.a
+	$(CC) -o $(NAME) $(LIB) $^
 
 clean:
 	rm -f $(OBJS)
