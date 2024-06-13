@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MakeFile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/06/11 16:12:32 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/06/13 12:54:29 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C ./libft fclean
 	@echo "dont forget to clean your 4skin"
 
 re: fclean all

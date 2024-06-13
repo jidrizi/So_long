@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/11 18:05:54 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:46:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ int	check_ber(char *arg)
 
 int	read_map(char *arg)
 {
-	open(arg, O_RDONLY);
-	read()
+	int fd;
+
+	fd = open(arg, O_RDONLY);
+	get_next_line(fd);
+	close(fd);
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char *argv[])
