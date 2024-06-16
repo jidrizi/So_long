@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/06/13 12:54:29 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/06/15 17:02:42 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADER = -I $(LIBMLX)/include -I libft/
 
 NAME = so_long
 DEPS = so_long.h 
-SRC = so_long.c
+SRC = so_long.c so_long_pngs.c so_long_mapstuff.c 
 OBJS = $(SRC:%.c=bin/%.o)
 
 all: clean_when_debug $(NAME)
@@ -36,7 +36,7 @@ $(LIBMLX)/build/libmlx42.a:
 	@make -C ./libft
 
 $(NAME): $(OBJS) $(LIBMLX)/build/libmlx42.a ./libft/libft.a $(DEPS)
-	$(CC) -o $(NAME) $(LIB) $< $(HEADER)
+	$(CC) -o $(NAME) $(LIB) $(OBJS) $(HEADER)
 
 clean:
 	@rm -fr bin/*
