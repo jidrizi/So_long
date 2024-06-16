@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/15 19:31:22 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/16 21:44:01 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ char	*get_map(char *arg1)
 		temp_reference = reference;
 		reference = ft_strjoin(temp_reference, line);
 		if (!reference)
-			return (costum_free((void **)&line), costum_free((void **)&temp_reference), NULL);
+			return (costum_free((void **)&line),
+				costum_free((void **)&temp_reference), NULL);
 		costum_free((void **)&line);
 		costum_free((void **)&temp_reference);
 		line = get_next_line(fd);
 	}
-	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E') || !ft_strchr(reference, 'C'))
+	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E')
+		|| !ft_strchr(reference, 'C'))
 		return (costum_free((void **)&reference), close(fd), NULL);
-	if (check_EPduplicates(reference))
+	if (check_ep_duplicates(reference))
 		return (costum_free((void **)&reference), close(fd), NULL);
 	return (close(fd), reference);
 }
@@ -69,7 +71,11 @@ int	put_window(char *arg1)
 	window = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	map = get_map(arg1);
 	if (!map)
+		return (1);
+	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
+		costum_free((void **)&map);
+		ft_printf("Error\nMap is not a rectangle\n");
 		return (1);
 	}
 	map_print(map, window);

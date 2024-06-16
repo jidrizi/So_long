@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/06/15 17:02:42 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/06/16 16:19:15 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all: clean_when_debug $(NAME)
 bin:
 	@mkdir bin
 
-bin/%.o : %.c | bin
+bin/%.o : %.c $(DEPS) | bin
 	$(CC) -c -o $@ $< $(CFLAGS) $(HEADER)
 
 $(LIBMLX)/build/libmlx42.a:
@@ -35,7 +35,7 @@ $(LIBMLX)/build/libmlx42.a:
 ./libft/libft.a:
 	@make -C ./libft
 
-$(NAME): $(OBJS) $(LIBMLX)/build/libmlx42.a ./libft/libft.a $(DEPS)
+$(NAME): $(OBJS) $(LIBMLX)/build/libmlx42.a ./libft/libft.a
 	$(CC) -o $(NAME) $(LIB) $(OBJS) $(HEADER)
 
 clean:

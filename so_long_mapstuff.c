@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/15 19:30:57 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/16 21:03:54 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,67 @@ void	*map_print(char *map_file, mlx_t *window_file)
 	return 0;
 }
 
-int check_EPduplicates(char *map_file)
+int check_ep_duplicates(char *map_file)
 {
-	int P;
-	int E;
+	int p;
+	int e;
 	int x;
 
-	P = 0;
-	E = 0;
+	p = 0;
+	e = 0;
 	x = 0;
 	while (map_file[x])
 	{
 		if (map_file[x] == 'E')
-			E++;
+			e++;
 		if (map_file[x] == 'P')
-			P++;
+			p++;
 		x++;
 	}
-	if (E != 1 || P != 1)
+	if (e != 1 || p != 1)
 	{
-		ft_printf("There are E or P duplicates\n");
+		ft_printf("Error\nDuplicate E or P\n");
 		return (1);
 	}
 	return (0);
+}
+
+int	check_if_rectangle_map(char *map_file)
+{
+
+	int line;
+	int eol; // end of line
+	int first_eol;
+	int first_while;
+	
+	line = 0;
+	eol = 0;
+	first_eol = 0;
+	first_while = 69;
+	while(map_file[line] && first_while)
+	{
+		if (map_file[line] == '\n')
+		{
+			first_eol = line;
+			eol = first_eol;
+			first_while = 0;
+		}
+		line++;
+	}
+	while(map_file[line])
+	{
+		if (map_file[line] == '\n')
+		{
+			if (line - eol != first_eol + 1)
+					return (EXIT_FAILURE);
+			eol = line;
+		}
+		line++;
+	}
+	if (map_file[line] == '\0')
+	{
+		if (line - eol != first_eol + 1)
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
