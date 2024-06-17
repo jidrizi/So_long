@@ -102,11 +102,11 @@ int	check_if_rectangle_map(char *map_file)
 		{
 			first_eol = line;
 			eol = first_eol;
-			first_while = 0;
+			break ;
 		}
 		line++;
 	}
-	while(map_file[line])
+	while(map_file[++line])
 	{
 		if (map_file[line] == '\n')
 		{
