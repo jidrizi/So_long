@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/16 21:03:54 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:41:19 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	check_if_rectangle_map(char *map_file)
 		}
 		line++;
 	}
+	if (map_file[line] == '\0' && map_file[line - 1] == '\n')
+		return (EXIT_SUCCESS);
 	if (map_file[line] == '\0')
 	{
 		if (line - eol != first_eol + 1)
