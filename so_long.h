@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/16 17:21:22 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/18 14:49:08 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	costum_free(void **ptr);
 char	*get_map(char *arg1);
 int		put_window(char *arg1);
 int		print_png(mlx_t *window, int xaxis, int yaxis, char *path);
-void	*map_print(char *map_file, mlx_t *window_file);
+void	*put_png_in_map(char *map_file, mlx_t *window_file);
 int		check_ep_duplicates(char *map_file);
 int		check_if_rectangle_map(char *map_file);
+int		wall_frame_check(char *map_file);
 #endif

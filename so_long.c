@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/16 21:44:01 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:19:19 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,19 @@ int	put_window(char *arg1)
 
 	window = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	map = get_map(arg1);
-	if (!map)
-		return (1);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
 		ft_printf("Error\nMap is not a rectangle\n");
 		return (1);
 	}
-	map_print(map, window);
+	if (wall_frame_check(map) == EXIT_FAILURE)
+	{
+		costum_free((void **)&map);
+		ft_printf("Error\nMap is not surrounded by walls\n");
+		return (1);
+	}
+	put_png_in_map(map, window);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_loop(window);
 	return (0);

@@ -6,13 +6,13 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/17 14:41:19 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:45:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*map_print(char *map_file, mlx_t *window_file)
+void	*put_png_in_map(char *map_file, mlx_t *window_file)
 {
 	int letter;
 	int	x;
@@ -90,13 +90,11 @@ int	check_if_rectangle_map(char *map_file)
 	int line;
 	int eol; // end of line
 	int first_eol;
-	int first_while;
 	
 	line = 0;
 	eol = 0;
 	first_eol = 0;
-	first_while = 69;
-	while(map_file[line] && first_while)
+	while(map_file[line])
 	{
 		if (map_file[line] == '\n')
 		{
@@ -114,10 +112,7 @@ int	check_if_rectangle_map(char *map_file)
 					return (EXIT_FAILURE);
 			eol = line;
 		}
-		line++;
 	}
-	if (map_file[line] == '\0' && map_file[line - 1] == '\n')
-		return (EXIT_SUCCESS);
 	if (map_file[line] == '\0')
 	{
 		if (line - eol != first_eol + 1)
@@ -125,3 +120,47 @@ int	check_if_rectangle_map(char *map_file)
 	}
 	return (EXIT_SUCCESS);
 }
+
+int	wall_frame_check(char *map_file)
+{
+	int	letters;
+	int	len;
+	
+	letters = 0;
+	len = ft_strlen(map_file);
+	
+	while (map_file[++letters])
+	{
+		if (map_file[letters] == '\n' && map_file[letters + 1] != '1')
+			return (EXIT_FAILURE);
+		if (map_file[letters] == '\n')
+			break ;
+		if (map_file[letters] != '1')
+			return (EXIT_FAILURE);
+	}
+	while (map_file[len] != '\n')
+	{
+		len--;
+		if (map_file[len] == '\n')
+			break ;
+		if (map_file[len] != '1')
+			return (EXIT_FAILURE);
+	}
+	
+	while (map_file[letters++])
+	{
+		if (map_file[letters] == '\n')
+		{
+			if (map_file[letters + 1] != '1' || map_file[letters - 1] != '1')
+				return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+// int valid_map_path_check(char *map_file) // THE FLOOOOOD
+// {
+// 	char *map_cpy;
+	
+// 	map_cpy = ft_strdup(map_file);
+// 	ft_split(map_cpy, '\n');
+// }
