@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/23 12:39:37 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/23 15:05:53 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,39 @@ int valid_map_path_check(char *map_file) // THE FLOOOOOD
 	{
 		map = ft_strdup(map_file);
 		position = ft_strchr(map, 'P') - map;
+		map[position] = '1';
 	}
-
+	if (map[position - first_line_size] != '1')
+	{
+		position = position - first_line_size;
+		map[position] = '1';
+		valid_map_path_check(map);
+		position = position + first_line_size;
+	}
+	if (map[position + first_line_size] != '1')
+	{
+		position = position + first_line_size;
+		map[position] = '1';
+		valid_map_path_check(map);
+		position = position - first_line_size;
+	}
+	if (map[position + 1] != '1')
+	{
+		position = position + 1;
+		map[position] = '1';
+		valid_map_path_check(map);
+		position = position - 1;
+	}
+	if (map[position - 1] != '1')
+	{
+		position = position - 1;
+		map[position] = '1';
+		valid_map_path_check(map);
+		position = position + 1;
+	}
+	if (ft_strchr(map, 'C') || ft_strchr(map, 'E'))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 // 	int	x;
 // 	int y;
