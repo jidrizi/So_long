@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/23 15:05:53 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/23 16:50:55 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,45 +157,45 @@ int	wall_frame_check(char *map_file)
 	}
 	return (EXIT_SUCCESS);
 }
-int valid_map_path_check(char *map_file) // THE FLOOOOOD
+int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
 {
-	const int first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
-	static int position = 0;
-	static char *map;
+	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
+	static char	*map;
+	static int	i = 1;
+	const int	og_pos = position;
 
-	if (position == 0)
+	ft_printf("position: %d\n\n", og_pos);
+	if (i)
 	{
 		map = ft_strdup(map_file);
 		position = ft_strchr(map, 'P') - map;
+		// ft_printf("position: %d\n\n%s\n\n\n", position, map);
 		map[position] = '1';
+		i = 0;
 	}
 	if (map[position - first_line_size] != '1')
 	{
-		position = position - first_line_size;
-		map[position] = '1';
-		valid_map_path_check(map);
-		position = position + first_line_size;
+		map[position - first_line_size] = '1';
+		// ft_printf("position: %d\n\n%s\n\n\n", position - first_line_size, map);
+		valid_map_path_check(map, position - first_line_size);
 	}
 	if (map[position + first_line_size] != '1')
 	{
-		position = position + first_line_size;
-		map[position] = '1';
-		valid_map_path_check(map);
-		position = position - first_line_size;
-	}
-	if (map[position + 1] != '1')
-	{
-		position = position + 1;
-		map[position] = '1';
-		valid_map_path_check(map);
-		position = position - 1;
+		map[position + first_line_size] = '1';
+		// ft_printf("position: %d\n\n%s\n\n\n", position + first_line_size, map);
+		valid_map_path_check(map, position + first_line_size);
 	}
 	if (map[position - 1] != '1')
 	{
-		position = position - 1;
-		map[position] = '1';
-		valid_map_path_check(map);
-		position = position + 1;
+		map[position -	1] = '1';
+		// ft_printf("position: %d\n\n%s\n\n\n", position - 1, map);
+		valid_map_path_check(map, position - 1);
+	}
+	if (map[position + 1] != '1')
+	{
+		map[position + 1] = '1';
+		// ft_printf("position: %d\n\n%s\n\n\n", position + 1, map);
+		valid_map_path_check(map, position + 1);
 	}
 	if (ft_strchr(map, 'C') || ft_strchr(map, 'E'))
 		return (EXIT_FAILURE);

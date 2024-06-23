@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/20 18:36:27 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/23 15:39:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	*put_png_in_map(char *map_file, mlx_t *window_file);
 int		check_ep_duplicates(char *map_file);
 int		check_if_rectangle_map(char *map_file);
 int		wall_frame_check(char *map_file);
-int		valid_map_path_check(char *map_file);
+int		valid_map_path_check(char *map_file, int);
 #endif
