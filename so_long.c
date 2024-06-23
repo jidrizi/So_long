@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/18 17:19:19 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:36:50 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int	put_window(char *arg1)
 	{
 		costum_free((void **)&map);
 		ft_printf("Error\nMap is not surrounded by walls\n");
+		return (1);
+	}
+	if (valid_map_path_check(map) == EXIT_FAILURE)
+	{
+		costum_free((void **)&map);
+		ft_printf("Error\nMap has no valid path\n");
 		return (1);
 	}
 	put_png_in_map(map, window);

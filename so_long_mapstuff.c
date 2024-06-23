@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/18 18:45:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/23 12:39:37 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,54 @@ int	wall_frame_check(char *map_file)
 	}
 	return (EXIT_SUCCESS);
 }
-// int valid_map_path_check(char *map_file) // THE FLOOOOOD
-// {
-// 	char *map_cpy;
-	
-// 	map_cpy = ft_strdup(map_file);
-// 	ft_split(map_cpy, '\n');
-// }
+int valid_map_path_check(char *map_file) // THE FLOOOOOD
+{
+	const int first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
+	static int position = 0;
+	static char *map;
+
+	if (position == 0)
+	{
+		map = ft_strdup(map_file);
+		position = ft_strchr(map, 'P') - map;
+	}
+
+}
+// 	int	x;
+// 	int y;
+
+// 	x = 0;
+// 	y = 0;
+// 	while (map_file[++x])
+// 	{
+// 		if (map_file[x] == '\n')
+// 		{
+// 			y = x + 1; // might need to change this to y = x, not sure
+// 			break ;
+// 		}
+		
+// 	}
+// 	while (map_file[x] != 'P')
+// 		x++;
+// 	if (map_file[x + y] != '1')
+// 	{
+// 		x = x + y;
+// 		map_file[x] = '1'; // one way to flag the visited squares(might change)
+// 		valid_map_path_check(map_file);
+// 	}
+// 	if (map_file[x - y] != '1' )
+// 	{
+// 		x = x - y;
+// 		map_file[x] = '1';
+// 	}	
+// 	if (map_file[x + 1] != '1')
+// 	{
+// 		x = x + 1;
+// 		map_file[x] = '1';
+// 	}
+// 	if (map_file[x - 1] != '1')
+// 	{
+// 		x = x - 1;
+// 		map_file[x] = '1';
+// 	}
+// 	return (EXIT_SUCCESS);
