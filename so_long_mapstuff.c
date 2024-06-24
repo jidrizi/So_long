@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/23 16:50:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:18:38 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	*put_png_in_map(char *map_file, mlx_t *window_file)
 		}
 		letter++;
 	}
-	// return ((int [2]){x, y});
 	return 0;
 }
 
@@ -63,25 +62,25 @@ int check_ep_duplicates(char *map_file)
 {
 	int p;
 	int e;
-	int x;
+	int position;
 
 	p = 0;
 	e = 0;
-	x = 0;
-	while (map_file[x])
+	position = 0;
+	while (map_file[position])
 	{
-		if (map_file[x] == 'E')
+		if (map_file[position] == 'E')
 			e++;
-		if (map_file[x] == 'P')
+		if (map_file[position] == 'P')
 			p++;
-		x++;
+		position++;
 	}
-	if (e != 1 || p != 1)
+	if (e != 1 || p != 1 || (e != 1 && p != 1))
 	{
-		ft_printf("Error\nDuplicate E or P\n");
-		return (1);
+		ft_printf("Error\nOnly one E or P allowed\n");
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	check_if_rectangle_map(char *map_file)
@@ -162,80 +161,35 @@ int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
 	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
 	static char	*map;
 	static int	i = 1;
-	const int	og_pos = position;
-
-	ft_printf("position: %d\n\n", og_pos);
+;
 	if (i)
 	{
 		map = ft_strdup(map_file);
 		position = ft_strchr(map, 'P') - map;
-		// ft_printf("position: %d\n\n%s\n\n\n", position, map);
 		map[position] = '1';
 		i = 0;
 	}
 	if (map[position - first_line_size] != '1')
 	{
 		map[position - first_line_size] = '1';
-		// ft_printf("position: %d\n\n%s\n\n\n", position - first_line_size, map);
 		valid_map_path_check(map, position - first_line_size);
 	}
 	if (map[position + first_line_size] != '1')
 	{
 		map[position + first_line_size] = '1';
-		// ft_printf("position: %d\n\n%s\n\n\n", position + first_line_size, map);
 		valid_map_path_check(map, position + first_line_size);
 	}
 	if (map[position - 1] != '1')
 	{
 		map[position -	1] = '1';
-		// ft_printf("position: %d\n\n%s\n\n\n", position - 1, map);
 		valid_map_path_check(map, position - 1);
 	}
 	if (map[position + 1] != '1')
 	{
 		map[position + 1] = '1';
-		// ft_printf("position: %d\n\n%s\n\n\n", position + 1, map);
 		valid_map_path_check(map, position + 1);
 	}
 	if (ft_strchr(map, 'C') || ft_strchr(map, 'E'))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-// 	int	x;
-// 	int y;
-
-// 	x = 0;
-// 	y = 0;
-// 	while (map_file[++x])
-// 	{
-// 		if (map_file[x] == '\n')
-// 		{
-// 			y = x + 1; // might need to change this to y = x, not sure
-// 			break ;
-// 		}
-		
-// 	}
-// 	while (map_file[x] != 'P')
-// 		x++;
-// 	if (map_file[x + y] != '1')
-// 	{
-// 		x = x + y;
-// 		map_file[x] = '1'; // one way to flag the visited squares(might change)
-// 		valid_map_path_check(map_file);
-// 	}
-// 	if (map_file[x - y] != '1' )
-// 	{
-// 		x = x - y;
-// 		map_file[x] = '1';
-// 	}	
-// 	if (map_file[x + 1] != '1')
-// 	{
-// 		x = x + 1;
-// 		map_file[x] = '1';
-// 	}
-// 	if (map_file[x - 1] != '1')
-// 	{
-// 		x = x - 1;
-// 		map_file[x] = '1';
-// 	}
-// 	return (EXIT_SUCCESS);

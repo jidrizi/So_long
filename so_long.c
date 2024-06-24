@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/23 16:52:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:30:52 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,13 @@ char	*get_map(char *arg1)
 	}
 	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E')
 		|| !ft_strchr(reference, 'C'))
-		return (costum_free((void **)&reference), close(fd), NULL);
+	{
+		costum_free((void **)&reference);
+		ft_printf("Error\nMap is missing an element\n");
+		close(fd);
+		return (NULL);
+	}
+		
 	if (check_ep_duplicates(reference))
 		return (costum_free((void **)&reference), close(fd), NULL);
 	return (close(fd), reference);
@@ -70,6 +76,8 @@ int	put_window(char *arg1)
 
 	window = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	map = get_map(arg1);
+	if (!map)
+		return (1);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
