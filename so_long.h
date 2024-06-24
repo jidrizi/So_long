@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/23 15:39:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:13:43 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@
 # define EXIT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/exit.png"
 # define PLAYER_PATH "/Users/jidrizi/lol/thanks_for_fish/png/playerchar2.png"
 # define COLLECT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/Collectible.png"
-// // ENUMS
-// typedef enum e_coordinates
-// {
-// 	X,
-// 	Y
-// }			t_coordinates;
-
 // PROTOTYPES
 int		check_ber(char *arg);
 void	costum_free(void **ptr);
