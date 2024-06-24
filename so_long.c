@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/24 15:30:52 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/24 18:29:49 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ char	*get_map(char *arg1)
 
 int	put_window(char *arg1)
 {
-	mlx_t	*window;
 	char	*map;
+	struct s_mlx_stuff s_stuff;
 
-	window = mlx_init(WIDTH, HEIGHT, "so_long", true);
+	s_stuff.window = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	map = get_map(arg1);
 	if (!map)
 		return (1);
@@ -96,9 +96,10 @@ int	put_window(char *arg1)
 		ft_printf("Error\nMap has no valid path\n");
 		return (1);
 	}
-	put_png_in_map(map, window);
+	s_stuff.player = put_png_in_map(map, s_stuff.window, s_stuff);
+	mlx_key_hook(s_stuff.window, &move_player_hook, (void *)&s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx_loop(window);
+	mlx_loop(s_stuff.window);
 	return (0);
 }
 

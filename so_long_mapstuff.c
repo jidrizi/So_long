@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_mapstuff.c                                 :+:      :+:    :+:   */
+/*   so_long_map_duplicatestuff.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/24 15:18:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:23:55 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*put_png_in_map(char *map_file, mlx_t *window_file)
+mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff s_file)
 {
-	int letter;
-	int	x;
-	int	y;
+	int 			letter;
+	int				x;
+	int				y;
+	mlx_image_t		*player;
 	
 	x = 0;
 	y = 0;
@@ -45,7 +46,9 @@ void	*put_png_in_map(char *map_file, mlx_t *window_file)
 		}
 		if (map_file[letter] == 'P')
 		{
-			print_png(window_file, x, y, PLAYER_PATH);
+			player = print_png(window_file, x, y, PLAYER_PATH);
+			s_file.player_x = x;
+			s_file.player_y = y;
 			x = x + 100;
 		}
 		if (map_file[letter] == '\n')
@@ -55,7 +58,7 @@ void	*put_png_in_map(char *map_file, mlx_t *window_file)
 		}
 		letter++;
 	}
-	return 0;
+	return (player);
 }
 
 int check_ep_duplicates(char *map_file)
@@ -83,7 +86,7 @@ int check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-int	check_if_rectangle_map(char *map_file)
+int	check_if_rectangle_map_duplicate(char *map_file)
 {
 
 	int line;
@@ -159,37 +162,37 @@ int	wall_frame_check(char *map_file)
 int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
 {
 	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
-	static char	*map;
+	static char	*map_duplicate;
 	static int	i = 1;
 ;
 	if (i)
 	{
-		map = ft_strdup(map_file);
-		position = ft_strchr(map, 'P') - map;
-		map[position] = '1';
+		map_duplicate = ft_strdup(map_file);
+		position = ft_strchr(map_duplicate, 'P') - map_duplicate;
+		map_duplicate[position] = '1';
 		i = 0;
 	}
-	if (map[position - first_line_size] != '1')
+	if (map_duplicate[position - first_line_size] != '1')
 	{
-		map[position - first_line_size] = '1';
-		valid_map_path_check(map, position - first_line_size);
+		map_duplicate[position - first_line_size] = '1';
+		valid_map_duplicate_path_check(map_duplicate, position - first_line_size);
 	}
-	if (map[position + first_line_size] != '1')
+	if (map_duplicate[position + first_line_size] != '1')
 	{
-		map[position + first_line_size] = '1';
-		valid_map_path_check(map, position + first_line_size);
+		map_duplicate[position + first_line_size] = '1';
+		valid_map_duplicate_path_check(map_duplicate, position + first_line_size);
 	}
-	if (map[position - 1] != '1')
+	if (map_duplicate[position - 1] != '1')
 	{
-		map[position -	1] = '1';
-		valid_map_path_check(map, position - 1);
+		map_duplicate[position -	1] = '1';
+		valid_map_duplicate_path_check(map_duplicate, position - 1);
 	}
-	if (map[position + 1] != '1')
+	if (map_duplicate[position + 1] != '1')
 	{
-		map[position + 1] = '1';
-		valid_map_path_check(map, position + 1);
+		map_duplicate[position + 1] = '1';
+		valid_map_duplicate_path_check(map_duplicate, position + 1);
 	}
-	if (ft_strchr(map, 'C') || ft_strchr(map, 'E'))
+	if (ft_strchr(map_duplicate, 'C') || ft_strchr(map_duplicate, 'E'))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
