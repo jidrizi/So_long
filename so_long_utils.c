@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/25 20:51:21 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/25 20:59:04 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 	fun_struct = (struct s_mlx_stuff *)param;
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
-		
 		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x - 100, fun_struct->player_y);
 		fun_struct->player_x = fun_struct->player_x - 100;
 	}
