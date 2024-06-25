@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/24 18:20:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/25 20:51:21 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,34 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 	if (!image)
 		return (NULL);
 	mlx_delete_texture(texture);
-	if (!mlx_image_to_window(window, image, xaxis, yaxis))
+	if (mlx_image_to_window(window, image, xaxis, yaxis) == -1)
 		return (NULL);
 	return (image);
 }
-void move_player_hook(mlx_key_data_t keydata,(void*) param)
+void move_player_hook(mlx_key_data_t keydata, void *param)
 {
-	mlx_image_t *player1;
+	struct s_mlx_stuff	*fun_struct;
 	
-	
-	while (window)
+	fun_struct = (struct s_mlx_stuff *)param;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
-		if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		{
-			player1 = player;
-			mlx_delete_image(window, player);
-			mlx_image_to_window(window, player1, 100, 100);
-		}
+		
+		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x - 100, fun_struct->player_y);
+		fun_struct->player_x = fun_struct->player_x - 100;
+	}
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+	{
+		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x + 100, fun_struct->player_y);
+		fun_struct->player_x = fun_struct->player_x + 100;
+	}
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+	{
+		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x, fun_struct->player_y - 100);
+		fun_struct->player_y = fun_struct->player_y - 100;
+	}
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+	{
+		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x, fun_struct->player_y + 100);
+		fun_struct->player_y = fun_struct->player_y + 100;
 	}
 }

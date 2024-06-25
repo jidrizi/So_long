@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff s_file)
+mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff *s_file)
 {
 	int 			letter;
 	int				x;
@@ -46,9 +46,9 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		if (map_file[letter] == 'P')
 		{
+			s_file->player_x = x;
+			s_file->player_y = y;
 			player = print_png(window_file, x, y, PLAYER_PATH);
-			s_file.player_x = x;
-			s_file.player_y = y;
 			x = x + 100;
 		}
 		if (map_file[letter] == '\n')
@@ -86,7 +86,7 @@ int check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-int	check_if_rectangle_map_duplicate(char *map_file)
+int	check_if_rectangle_map(char *map_file)
 {
 
 	int line;
@@ -175,22 +175,22 @@ int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
 	if (map_duplicate[position - first_line_size] != '1')
 	{
 		map_duplicate[position - first_line_size] = '1';
-		valid_map_duplicate_path_check(map_duplicate, position - first_line_size);
+		valid_map_path_check(map_duplicate, position - first_line_size);
 	}
 	if (map_duplicate[position + first_line_size] != '1')
 	{
 		map_duplicate[position + first_line_size] = '1';
-		valid_map_duplicate_path_check(map_duplicate, position + first_line_size);
+		valid_map_path_check(map_duplicate, position + first_line_size);
 	}
 	if (map_duplicate[position - 1] != '1')
 	{
 		map_duplicate[position -	1] = '1';
-		valid_map_duplicate_path_check(map_duplicate, position - 1);
+		valid_map_path_check(map_duplicate, position - 1);
 	}
 	if (map_duplicate[position + 1] != '1')
 	{
 		map_duplicate[position + 1] = '1';
-		valid_map_duplicate_path_check(map_duplicate, position + 1);
+		valid_map_path_check(map_duplicate, position + 1);
 	}
 	if (ft_strchr(map_duplicate, 'C') || ft_strchr(map_duplicate, 'E'))
 		return (EXIT_FAILURE);

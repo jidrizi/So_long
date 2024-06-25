@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/24 18:32:35 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/25 19:55:10 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ struct s_mlx_stuff{
 	int 		player_y;
 };
 // PROTOTYPES
-int				check_ber(char *arg);
-void			costum_free(void **ptr);
-char			*get_map(char *arg1);
-int				put_window(char *arg1);
-mlx_image_t		*print_png(mlx_t *window, int xaxis, int yaxis, char *path);
-void			*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff s_file);
-int				check_ep_duplicates(char *map_file);
-int				check_if_rectangle_map(char *map_file);
-int				wall_frame_check(char *map_file);
-int				valid_map_path_check(char *map_file, int);
-void			move_player_hook(mlx_key_data_t keydata,(void *)param);
+int			check_ber(char *arg);
+void		costum_free(void **ptr);
+char		*get_map(char *arg1);
+int			put_window(char *arg1);
+mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path);
+mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
+				struct s_mlx_stuff *s_file);
+int			check_ep_duplicates(char *map_file);
+int			check_if_rectangle_map(char *map_file);
+int			wall_frame_check(char *map_file);
+int			valid_map_path_check(char *map_file, int position);
+void		move_player_hook(mlx_key_data_t keydata,void *param);
 #endif
