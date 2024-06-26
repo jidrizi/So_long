@@ -36,6 +36,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		if (map_file[letter] == 'C')
 		{
+			print_png(window_file, x, y, FLOOR_PATH);
 			print_png(window_file, x, y, COLLECT_PATH);
 			x = x + 100;
 		}
@@ -46,9 +47,9 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		if (map_file[letter] == 'P')
 		{
+			print_png(window_file, x, y, FLOOR_PATH);
 			s_file->player_x = x;
 			s_file->player_y = y;
-			player = print_png(window_file, x, y, PLAYER_PATH);
 			x = x + 100;
 		}
 		if (map_file[letter] == '\n')
@@ -58,6 +59,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		letter++;
 	}
+	player = print_png(window_file, s_file->player_x, s_file->player_y, PLAYER_PATH);
 	return (player);
 }
 

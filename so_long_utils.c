@@ -30,31 +30,27 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 }
 void move_player_hook(mlx_key_data_t keydata, void *param)
 {
-	struct s_mlx_stuff	*fun_struct;
+	struct s_mlx_stuff	*s_stuff1;
 	
-	fun_struct = (struct s_mlx_stuff *)param;
+	s_stuff1 = (struct s_mlx_stuff *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
-		mlx_close_window(fun_struct->window);
+		mlx_close_window(s_stuff1->window);
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
-		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x - 100, fun_struct->player_y);
-		fun_struct->player_x = fun_struct->player_x - 100;
+		s_stuff1->player->instances->x -= 100;
 	}
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 	{
-		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x + 100, fun_struct->player_y);
-		fun_struct->player_x = fun_struct->player_x + 100;
+		s_stuff1->player->instances->x += 100;
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 	{
-		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x, fun_struct->player_y - 100);
-		fun_struct->player_y = fun_struct->player_y - 100;
+		s_stuff1->player->instances->y -= 100;
 	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 	{
-		mlx_image_to_window(fun_struct->window, fun_struct->player, fun_struct->player_x, fun_struct->player_y + 100);
-		fun_struct->player_y = fun_struct->player_y + 100;
+		s_stuff1->player->instances->y += 100;
 	}
 }
