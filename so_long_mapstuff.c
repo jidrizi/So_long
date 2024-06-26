@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff *s_file)
+mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff *s_stuff)
 {
 	int 			letter;
 	int				x;
@@ -48,8 +48,8 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		if (map_file[letter] == 'P')
 		{
 			print_png(window_file, x, y, FLOOR_PATH);
-			s_file->player_x = x;
-			s_file->player_y = y;
+			s_stuff->player_x = x;
+			s_stuff->player_y = y;
 			x = x + 100;
 		}
 		if (map_file[letter] == '\n')
@@ -59,7 +59,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		letter++;
 	}
-	player = print_png(window_file, s_file->player_x, s_file->player_y, PLAYER_PATH);
+	player = print_png(window_file, s_stuff->player_x, s_stuff->player_y, PLAYER_PATH);
 	return (player);
 }
 
