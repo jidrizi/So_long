@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/25 19:55:18 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 16:32:32 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ char	*get_map(char *arg1)
 
 int	put_window(char *arg1)
 {
-	char	*map;
-	struct s_mlx_stuff s_stuff;
+	char				*map;
+	struct s_mlx_stuff	s_stuff;
+	int 				*for_window;
 
-	s_stuff.window = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	map = get_map(arg1);
 	if (!map)
 		return (1);
+	for_window = finder_of_width_height(map);
+	s_stuff.window = mlx_init(for_window[0],for_window[1], "so_long", true);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);

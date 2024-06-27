@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 15:57:28 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:15:42 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,27 @@ int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
 		}
 	}
 	return (0);
+}
+int	*finder_of_width_height(char *map_file)
+{
+	int width;
+	int pos; //position
+	int height;
+	
+	width = 0;
+	height = 0;
+	while(map_file[width] != '\n')
+		width++;
+	height++;	
+	pos = width;
+	while(map_file[pos])
+	{
+		if (map_file[pos] == '\n')
+			height++;
+		pos++;
+	}
+	height = height * 100;
+	width = width * 100;
+	return ((int[2]){width, height});
 }
 

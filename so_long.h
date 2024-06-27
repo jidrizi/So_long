@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 14:10:59 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:11:12 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "MLX42/MLX42.h"
 
 // MACROS
-# define WIDTH 5120
-# define HEIGHT 2880
+			// # define WIDTH 5120
+			// # define HEIGHT 2880
 # define WALL_PATH "/Users/jidrizi/lol/thanks_for_fish/png/wall.png"
 # define FLOOR_PATH "/Users/jidrizi/lol/thanks_for_fish/png/floor.png"
 # define EXIT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/exit.png"
@@ -39,6 +39,8 @@ struct s_mlx_stuff{
 	int			player_x;
 	int 		player_y;
 	mlx_image_t	*wall;
+	mlx_image_t	*exit;
+	mlx_image_t	*collectible;
 };
 // PROTOTYPES
 int			check_ber(char *arg);
@@ -53,5 +55,7 @@ int			check_if_rectangle_map(char *map_file);
 int			wall_frame_check(char *map_file);
 int			valid_map_path_check(char *map_file, int position);
 void		move_player_hook(mlx_key_data_t keydata,void *param);
-int			check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image);
+int			check_if_going_to_walls(int player_x, int player_y,
+			mlx_image_t *wall_image);
+int			*finder_of_width_height(char *map_file);
 #endif
