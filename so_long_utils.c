@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 17:15:42 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:58:34 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
 			return ;
 		s_stuff1->player->instances->x -= 100;
+		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
 		moves++;
 		ft_printf("player moves: %d\n",moves);
 	}
@@ -52,6 +53,7 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
 			return ;
 		s_stuff1->player->instances->x += 100;
+		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
 		moves++;
 		ft_printf("player moves: %d\n",moves);
 		
@@ -62,6 +64,7 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 			 s_stuff1->player->instances->y - 100, s_stuff1->wall) == 1)
 			 return ;
 		s_stuff1->player->instances->y -= 100;
+		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
 		moves++;
 		ft_printf("player moves: %d\n",moves);
 	}
@@ -71,6 +74,7 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 			 s_stuff1->player->instances->y + 100, s_stuff1->wall) == 1)
 			 return ;
 		s_stuff1->player->instances->y += 100;
+		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
 		moves++;
 		ft_printf("player moves: %d\n",moves);
 	}
@@ -110,5 +114,33 @@ int	*finder_of_width_height(char *map_file)
 	height = height * 100;
 	width = width * 100;
 	return ((int[2]){width, height});
+}
+void check_if_touching_collectible(int player_x, int player_y,
+		 mlx_image_t *collectible_image)
+{
+	size_t	pos; //position
+	
+	pos = -1;
+	while (collectible_image->count > ++pos)
+	{
+		if (player_x == collectible_image->instances[pos].x && player_y == collectible_image->instances[pos].y)
+		{
+			collectible_image->instances[pos].enabled = false;
+		}
+	}
+}
+bool check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
+{
+	size_t	pos; //position
+	
+	pos = -1;
+	while (collectible_image->count > ++pos)
+	{
+		if (collectible_image->instances[pos].enabled == true)
+		{
+			return (false);
+		}
+	}
+	return (true);
 }
 

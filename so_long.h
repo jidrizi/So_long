@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 17:11:12 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:46:02 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ void		move_player_hook(mlx_key_data_t keydata,void *param);
 int			check_if_going_to_walls(int player_x, int player_y,
 			mlx_image_t *wall_image);
 int			*finder_of_width_height(char *map_file);
+void		check_if_touching_collectible(int player_x, 
+				int player_y, mlx_image_t *collectible_image);
 #endif
