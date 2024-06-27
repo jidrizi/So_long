@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/26 13:30:34 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:57:28 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 void move_player_hook(mlx_key_data_t keydata, void *param)
 {
 	struct s_mlx_stuff	*s_stuff1;
-	
+	static int			moves = 0;
 	s_stuff1 = (struct s_mlx_stuff *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
@@ -39,18 +39,54 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
+		if (check_if_going_to_walls(s_stuff1->player->instances->x - 100,
+			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
+			return ;
 		s_stuff1->player->instances->x -= 100;
+		moves++;
+		ft_printf("player moves: %d\n",moves);
 	}
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 	{
+		if (check_if_going_to_walls(s_stuff1->player->instances->x + 100,
+			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
+			return ;
 		s_stuff1->player->instances->x += 100;
+		moves++;
+		ft_printf("player moves: %d\n",moves);
+		
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 	{
+		if (check_if_going_to_walls(s_stuff1->player->instances->x,
+			 s_stuff1->player->instances->y - 100, s_stuff1->wall) == 1)
+			 return ;
 		s_stuff1->player->instances->y -= 100;
+		moves++;
+		ft_printf("player moves: %d\n",moves);
 	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 	{
+		if (check_if_going_to_walls(s_stuff1->player->instances->x,
+			 s_stuff1->player->instances->y + 100, s_stuff1->wall) == 1)
+			 return ;
 		s_stuff1->player->instances->y += 100;
+		moves++;
+		ft_printf("player moves: %d\n",moves);
 	}
 }
+int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
+{
+	size_t	pos; //position
+	
+	pos = -1;
+	while (wall_image->count > ++pos)
+	{
+		if (player_x == wall_image->instances[pos].x && player_y == wall_image->instances[pos].y)
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
+

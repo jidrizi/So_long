@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/25 19:55:10 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/27 14:10:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_mlx_stuff{
 	mlx_t 		*window;
 	int			player_x;
 	int 		player_y;
+	mlx_image_t	*wall;
 };
 // PROTOTYPES
 int			check_ber(char *arg);
@@ -52,4 +53,5 @@ int			check_if_rectangle_map(char *map_file);
 int			wall_frame_check(char *map_file);
 int			valid_map_path_check(char *map_file, int position);
 void		move_player_hook(mlx_key_data_t keydata,void *param);
+int			check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image);
 #endif

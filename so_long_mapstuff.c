@@ -18,15 +18,19 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 	int				x;
 	int				y;
 	mlx_image_t		*player;
+	mlx_texture_t	*wall_texture;
 	
 	x = 0;
 	y = 0;
 	letter = 0;
+	wall_texture = mlx_load_png(WALL_PATH);
+	s_stuff->wall = mlx_texture_to_image(window_file, wall_texture);
+	mlx_delete_texture(wall_texture);
 	while (map_file[letter])
 	{
 		if (map_file[letter] == '1')
 		{
-			print_png(window_file, x, y, WALL_PATH);
+			mlx_image_to_window(window_file, s_stuff->wall, x, y);
 			x = x + 100;
 		}
 		if (map_file[letter] == '0')
