@@ -20,15 +20,21 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 	mlx_image_t		*player;
 	mlx_texture_t	*wall_texture;
 	mlx_texture_t	*collectible_texture;
+	mlx_texture_t	*exit_texture;
 	
 	x = 0;
 	y = 0;
 	letter = 0;
 	wall_texture = mlx_load_png(WALL_PATH);
 	collectible_texture = mlx_load_png(COLLECT_PATH);
+	exit_texture = mlx_load_png(EXIT_PATH);
 	s_stuff->wall = mlx_texture_to_image(window_file, wall_texture);
 	s_stuff->collectible = mlx_texture_to_image(window_file, collectible_texture);
+	s_stuff->exit = mlx_texture_to_image(window_file, exit_texture);
+	
 	mlx_delete_texture(wall_texture);
+	mlx_delete_texture(collectible_texture);
+	mlx_delete_texture(exit_texture);
 	while (map_file[letter])
 	{
 		if (map_file[letter] == '1')
@@ -49,7 +55,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		if (map_file[letter] == 'E')
 		{
-			print_png(window_file, x, y, EXIT_PATH);
+			mlx_image_to_window(window_file, s_stuff->exit, x, y);
 			x = x + 100;
 		}
 		if (map_file[letter] == 'P')
