@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 17:58:33 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:06:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,30 +164,12 @@ bool check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
 	return (true);
 }
 
-void victory_hook(mlx_key_data_t keydata, void *param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		mlx_close_window((mlx_t *)param);
-	}
-}
-
 void player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window)
 {
-	mlx_texture_t	*victory_texture;
-	mlx_image_t		*victory_image;
-	
+
 	if (player->instances->x == exit->instances->x && player->instances->y == exit->instances->y)
 	{
 		mlx_close_window(window);
-		window = mlx_init(2000, 2000, "VICTORY", true);
-		victory_texture = mlx_load_png(VICTORY_PATH);
-		victory_image = mlx_texture_to_image(window, victory_texture);
-		mlx_delete_texture(victory_texture);
-		mlx_image_to_window(window, victory_image, 0, 0);
-		mlx_key_hook(window, &victory_hook, window);
-		mlx_loop(window);
-		mlx_delete_image(window, victory_image);
 	}
 }
 

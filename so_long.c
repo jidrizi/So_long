@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 17:08:18 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:07:26 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,38 @@ int	put_window(char *arg1)
 	mlx_key_hook(s_stuff.window, &move_player_hook, (void *)&s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_loop(s_stuff.window);
+	mlx_terminate(s_stuff.window);
 	return (0);
+}
+
+void victory_hook(mlx_key_data_t keydata, void *param)
+{
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		mlx_close_window((mlx_t *)param);
+	}
 }
 
 int	main(int argc, char *argv[])
 {
+	mlx_texture_t	*victory_texture;
+	mlx_image_t		*victory_image;
+	mlx_t			*victory_window;
+	
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (check_ber(argv[1]))
 		return (EXIT_FAILURE);
 	if (put_window(argv[1]) == 1)
 		return (EXIT_FAILURE);
+	victory_window = mlx_init(2000, 2000, "VICTORY", true);
+	victory_texture = mlx_load_png(VICTORY_PATH);
+	victory_image = mlx_texture_to_image(victory_window, victory_texture);
+	mlx_delete_texture(victory_texture);
+	mlx_image_to_window(victory_window, victory_image, 0, 0);
+	mlx_key_hook(victory_window, &victory_hook, victory_window);
+	mlx_loop(victory_window);
+	mlx_delete_image(victory_window, victory_image);
 	return (0);
 }
 
