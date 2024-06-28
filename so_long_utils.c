@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:26:10 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:42:54 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 		return (NULL);
 	return (image);
 }
-void move_player_hook(mlx_key_data_t keydata, void *param)
+
+void	move_player_hook(mlx_key_data_t keydata, void *param)
 {
 	struct s_mlx_stuff	*s_stuff1;
 	static int			moves = 0;
+
 	s_stuff1 = (struct s_mlx_stuff *)param;
 	s_stuff1->escape = false;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -42,7 +44,7 @@ void move_player_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
 		if (check_if_going_to_walls(s_stuff1->player->instances->x - 100,
-			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
+			s_stuff1->player->instances->y, s_stuff1->wall) == 1)
 			return ;
 		s_stuff1->player->instances->x -= 100;
 		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
@@ -117,17 +119,17 @@ int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
 }
 int	*finder_of_width_height(char *map_file)
 {
-	int width;
-	int pos; //position
-	int height;
-	
+	int	width;
+	int	pos; //position
+	int	height;
+
 	width = 0;
 	height = 0;
-	while(map_file[width] != '\n')
+	while (map_file[width] != '\n')
 		width++;
-	height++;	
+	height++;
 	pos = width;
-	while(map_file[pos])
+	while (map_file[pos])
 	{
 		if (map_file[pos] == '\n')
 			height++;
@@ -135,43 +137,21 @@ int	*finder_of_width_height(char *map_file)
 	}
 	height = height * 100;
 	width = width * 100;
-	return ((int[2]){width, height});
+	return((int[2]){width, height});
 }
-void check_if_touching_collectible(int player_x, int player_y,
-		 mlx_image_t *collectible_image)
+
+void	check_if_touching_collectible(int player_x, int player_y,
+		mlx_image_t *collectible_image)
 {
-	size_t	pos; //position
-	
+	size_t	pos;
+
 	pos = -1;
 	while (collectible_image->count > ++pos)
 	{
-		if (player_x == collectible_image->instances[pos].x && player_y == collectible_image->instances[pos].y)
+		if (player_x == collectible_image->instances[pos].x && player_y
+			== collectible_image->instances[pos].y)
 		{
 			collectible_image->instances[pos].enabled = false;
 		}
 	}
 }
-bool check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
-{
-	size_t	pos; //position
-	
-	pos = -1;
-	while (collectible_image->count > ++pos)
-	{
-		if (collectible_image->instances[pos].enabled == true)
-		{
-			return (false);
-		}
-	}
-	return (true);
-}
-
-void player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window)
-{
-
-	if (player->instances->x == exit->instances->x && player->instances->y == exit->instances->y)
-	{
-		mlx_close_window(window);
-	}
-}
-

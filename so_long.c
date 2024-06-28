@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:32:50 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:38:41 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ int	check_ber(char *arg1)
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
-}
-
-void	costum_free(void **ptr)
-{
-	if (ptr == NULL)
-		return ;
-	if (*ptr)
-		free(*ptr);
-	*ptr = NULL;
 }
 
 char	*get_map(char *arg1)
@@ -76,7 +67,6 @@ char	*get_map(char *arg1)
 		close(fd);
 		return (NULL);
 	}
-		
 	if (check_ep_duplicates(reference))
 		return (costum_free((void **)&reference), close(fd), NULL);
 	return (close(fd), reference);
@@ -84,14 +74,14 @@ char	*get_map(char *arg1)
 
 int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 {
-	char				*map;
-	int 				*for_window;
+	char	*map;
+	int		*for_window;
 
 	map = get_map(arg1);
 	if (!map)
 		return (1);
 	for_window = finder_of_width_height(map);
-	s_stuff->window = mlx_init(for_window[0],for_window[1], "so_long", true);
+	s_stuff->window = mlx_init(for_window[0], for_window[1], "so_long", true);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
@@ -118,7 +108,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	return (0);
 }
 
-void victory_hook(mlx_key_data_t keydata, void *param)
+void	victory_hook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
@@ -128,11 +118,10 @@ void victory_hook(mlx_key_data_t keydata, void *param)
 
 int	main(int argc, char *argv[])
 {
-	mlx_texture_t	*victory_texture;
-	mlx_image_t		*victory_image;
-	mlx_t			*victory_window;
+	mlx_texture_t		*victory_texture;
+	mlx_image_t			*victory_image;
+	mlx_t				*victory_window;
 	struct s_mlx_stuff	*s_stuff;
-	
 	s_stuff = ft_calloc(sizeof(struct s_mlx_stuff), 1);
 	if (argc != 2)
 		return (EXIT_FAILURE);
@@ -152,4 +141,3 @@ int	main(int argc, char *argv[])
 	mlx_delete_image(victory_window, victory_image);
 	return (0);
 }
-

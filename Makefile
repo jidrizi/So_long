@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/06/24 15:27:59 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/06/28 19:43:45 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADER = -I $(LIBMLX)/include -I libft/
 
 NAME = so_long
 DEPS = so_long.h 
-SRC = so_long.c so_long_utils.c so_long_mapstuff.c 
+SRC = so_long.c so_long_utils.c so_long_utils2.c so_long_mapstuff.c 
 OBJS = $(SRC:%.c=bin/%.o)
 
 all: clean_when_debug $(NAME)
