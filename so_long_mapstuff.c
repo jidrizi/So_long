@@ -55,7 +55,9 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		if (map_file[letter] == 'E')
 		{
+			print_png(window_file, x, y, FLOOR_PATH);
 			mlx_image_to_window(window_file, s_stuff->exit, x, y);
+			s_stuff->exit->instances->enabled = false;
 			x = x + 100;
 		}
 		if (map_file[letter] == 'P')

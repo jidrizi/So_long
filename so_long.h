@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 17:46:02 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:20:58 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define EXIT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/exit.png"
 # define PLAYER_PATH "/Users/jidrizi/lol/thanks_for_fish/png/playerchar2.png"
 # define COLLECT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/Collectible.png"
+# define VICTORY_PATH "/Users/jidrizi/lol/thanks_for_fish/png/victory.png"
 // STRUCTS
 struct s_mlx_stuff{
 	mlx_image_t	*player;
@@ -41,6 +42,7 @@ struct s_mlx_stuff{
 	mlx_image_t	*wall;
 	mlx_image_t	*exit;
 	mlx_image_t	*collectible;
+	mlx_image_t	*victory;
 };
 // PROTOTYPES
 int			check_ber(char *arg);
@@ -60,4 +62,6 @@ int			check_if_going_to_walls(int player_x, int player_y,
 int			*finder_of_width_height(char *map_file);
 void		check_if_touching_collectible(int player_x, 
 				int player_y, mlx_image_t *collectible_image);
+bool		check_if_all_collectibles_are_gone(mlx_image_t *collectible_image);
+void		check_if_touching_exit(int player_x, int player_y, mlx_image_t *exit_image, mlx_image_t *victory_image);
 #endif
