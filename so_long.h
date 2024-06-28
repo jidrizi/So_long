@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 16:27:37 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:33:21 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ struct s_mlx_stuff{
 	mlx_image_t	*exit;
 	mlx_image_t	*collectible;
 	mlx_image_t	*victory;
+	bool		escape;
 };
 // PROTOTYPES
 int			check_ber(char *arg);
 void		costum_free(void **ptr);
 char		*get_map(char *arg1);
-int			put_window(char *arg1);
+int			put_window(char *arg1, struct s_mlx_stuff *s_stuff);
 mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path);
 mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
 				struct s_mlx_stuff *s_file);

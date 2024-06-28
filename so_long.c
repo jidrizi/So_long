@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 18:07:26 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:32:50 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,16 @@ char	*get_map(char *arg1)
 	return (close(fd), reference);
 }
 
-int	put_window(char *arg1)
+int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 {
 	char				*map;
-	struct s_mlx_stuff	s_stuff;
 	int 				*for_window;
 
 	map = get_map(arg1);
 	if (!map)
 		return (1);
 	for_window = finder_of_width_height(map);
-	s_stuff.window = mlx_init(for_window[0],for_window[1], "so_long", true);
+	s_stuff->window = mlx_init(for_window[0],for_window[1], "so_long", true);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
@@ -111,11 +110,11 @@ int	put_window(char *arg1)
 		ft_printf("Error\nMap has no valid path\n");
 		return (1);
 	}
-	s_stuff.player = put_png_in_map(map, s_stuff.window, &s_stuff);
-	mlx_key_hook(s_stuff.window, &move_player_hook, (void *)&s_stuff);
+	s_stuff->player = put_png_in_map(map, s_stuff->window, s_stuff);
+	mlx_key_hook(s_stuff->window, &move_player_hook, (void *)s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx_loop(s_stuff.window);
-	mlx_terminate(s_stuff.window);
+	mlx_loop(s_stuff->window);
+	mlx_terminate(s_stuff->window);
 	return (0);
 }
 
@@ -132,13 +131,17 @@ int	main(int argc, char *argv[])
 	mlx_texture_t	*victory_texture;
 	mlx_image_t		*victory_image;
 	mlx_t			*victory_window;
+	struct s_mlx_stuff	*s_stuff;
 	
+	s_stuff = ft_calloc(sizeof(struct s_mlx_stuff), 1);
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (check_ber(argv[1]))
 		return (EXIT_FAILURE);
-	if (put_window(argv[1]) == 1)
+	if (put_window(argv[1], s_stuff) == 1)
 		return (EXIT_FAILURE);
+	if (s_stuff->escape == true)
+		return (0);
 	victory_window = mlx_init(2000, 2000, "VICTORY", true);
 	victory_texture = mlx_load_png(VICTORY_PATH);
 	victory_image = mlx_texture_to_image(victory_window, victory_texture);
