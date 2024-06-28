@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:42:54 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:54:23 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,27 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		ft_printf("player moves: %d\n",moves);
 	}
 }
+
 int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
 {
-	size_t	pos; //position
-	
+	size_t	pos;
+
 	pos = -1;
 	while (wall_image->count > ++pos)
 	{
-		if (player_x == wall_image->instances[pos].x && player_y == wall_image->instances[pos].y)
+		if (player_x == wall_image->instances[pos].x && player_y
+			== wall_image->instances[pos].y)
 		{
 			return (1);
 		}
 	}
 	return (0);
 }
+
 int	*finder_of_width_height(char *map_file)
 {
 	int	width;
-	int	pos; //position
+	int	pos;
 	int	height;
 
 	width = 0;
@@ -137,7 +140,7 @@ int	*finder_of_width_height(char *map_file)
 	}
 	height = height * 100;
 	width = width * 100;
-	return((int[2]){width, height});
+	return ((int [2]){width, height});
 }
 
 void	check_if_touching_collectible(int player_x, int player_y,

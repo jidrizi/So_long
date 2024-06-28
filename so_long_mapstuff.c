@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_map_duplicatestuff.c                                 :+:      :+:    :+:   */
+/*   so_long_mapstuff.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/24 16:23:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:53:13 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stuff *s_stuff)
+mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
+				struct s_mlx_stuff *s_stuff)
 {
-	int 			letter;
+	int				letter;
 	int				x;
 	int				y;
 	mlx_image_t		*player;
 	mlx_texture_t	*wall_texture;
 	mlx_texture_t	*collectible_texture;
 	mlx_texture_t	*exit_texture;
-	
+
 	x = 0;
 	y = 0;
 	letter = 0;
@@ -29,9 +30,9 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 	collectible_texture = mlx_load_png(COLLECT_PATH);
 	exit_texture = mlx_load_png(EXIT_PATH);
 	s_stuff->wall = mlx_texture_to_image(window_file, wall_texture);
-	s_stuff->collectible = mlx_texture_to_image(window_file, collectible_texture);
+	s_stuff->collectible = mlx_texture_to_image(window_file,
+			collectible_texture);
 	s_stuff->exit = mlx_texture_to_image(window_file, exit_texture);
-	
 	mlx_delete_texture(wall_texture);
 	mlx_delete_texture(collectible_texture);
 	mlx_delete_texture(exit_texture);
@@ -50,7 +51,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		if (map_file[letter] == 'C')
 		{
 			print_png(window_file, x, y, FLOOR_PATH);
-			mlx_image_to_window(window_file, s_stuff->collectible , x, y);
+			mlx_image_to_window(window_file, s_stuff->collectible, x, y);
 			x = x + 100;
 		}
 		if (map_file[letter] == 'E')
@@ -74,15 +75,16 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file, struct s_mlx_stu
 		}
 		letter++;
 	}
-	player = print_png(window_file, s_stuff->player_x, s_stuff->player_y, PLAYER_PATH);
+	player = print_png(window_file, s_stuff->player_x, s_stuff->player_y,
+			PLAYER_PATH);
 	return (player);
 }
 
-int check_ep_duplicates(char *map_file)
+int	check_ep_duplicates(char *map_file)
 {
-	int p;
-	int e;
-	int position;
+	int	p;
+	int	e;
+	int	position;
 
 	p = 0;
 	e = 0;
@@ -103,17 +105,18 @@ int check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
+//eol = end of line
 int	check_if_rectangle_map(char *map_file)
-{
 
-	int line;
-	int eol; // end of line
-	int first_eol;
-	
+{
+	int	line;
+	int	eol;
+	int	first_eol;
+
 	line = 0;
 	eol = 0;
 	first_eol = 0;
-	while(map_file[line])
+	while (map_file[line])
 	{
 		if (map_file[line] == '\n')
 		{
@@ -123,12 +126,12 @@ int	check_if_rectangle_map(char *map_file)
 		}
 		line++;
 	}
-	while(map_file[++line])
+	while (map_file[++line])
 	{
 		if (map_file[line] == '\n')
 		{
 			if (line - eol != first_eol + 1)
-					return (EXIT_FAILURE);
+				return (EXIT_FAILURE);
 			eol = line;
 		}
 	}
@@ -144,10 +147,9 @@ int	wall_frame_check(char *map_file)
 {
 	int	letters;
 	int	len;
-	
+
 	letters = 0;
 	len = ft_strlen(map_file);
-	
 	while (map_file[++letters])
 	{
 		if (map_file[letters] == '\n' && map_file[letters + 1] != '1')
@@ -165,7 +167,6 @@ int	wall_frame_check(char *map_file)
 		if (map_file[len] != '1')
 			return (EXIT_FAILURE);
 	}
-	
 	while (map_file[letters++])
 	{
 		if (map_file[letters] == '\n')
@@ -176,12 +177,14 @@ int	wall_frame_check(char *map_file)
 	}
 	return (EXIT_SUCCESS);
 }
-int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
+
+//FLOOD
+int	valid_map_path_check(char *map_file, int position)
 {
 	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
 	static char	*map_duplicate;
 	static int	i = 1;
-;
+
 	if (i)
 	{
 		map_duplicate = ft_strdup(map_file);
@@ -201,7 +204,7 @@ int valid_map_path_check(char *map_file, int position) // THE FLOOOOOD
 	}
 	if (map_duplicate[position - 1] != '1')
 	{
-		map_duplicate[position -	1] = '1';
+		map_duplicate[position - 1] = '1';
 		valid_map_path_check(map_duplicate, position - 1);
 	}
 	if (map_duplicate[position + 1] != '1')

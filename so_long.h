@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:33:21 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:45:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 // STRUCTS
 struct s_mlx_stuff{
 	mlx_image_t	*player;
-	mlx_t 		*window;
+	mlx_t		*window;
 	int			player_x;
-	int 		player_y;
+	int			player_y;
 	mlx_image_t	*wall;
 	mlx_image_t	*exit;
 	mlx_image_t	*collectible;
@@ -57,12 +57,12 @@ int			check_ep_duplicates(char *map_file);
 int			check_if_rectangle_map(char *map_file);
 int			wall_frame_check(char *map_file);
 int			valid_map_path_check(char *map_file, int position);
-void		move_player_hook(mlx_key_data_t keydata,void *param);
+void		move_player_hook(mlx_key_data_t keydata, void *param);
 int			check_if_going_to_walls(int player_x, int player_y,
-			mlx_image_t *wall_image);
+				mlx_image_t	*wall_image);
 int			*finder_of_width_height(char *map_file);
-void		check_if_touching_collectible(int player_x, 
+void		check_if_touching_collectible(int player_x,
 				int player_y, mlx_image_t *collectible_image);
 bool		check_if_all_collectibles_are_gone(mlx_image_t *collectible_image);
-void player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window);
+void		player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window);
 #endif
