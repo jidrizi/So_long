@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/27 16:32:32 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:08:18 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,17 @@ int	check_ber(char *arg1)
 
 	len = ft_strlen(arg1);
 	len -= 4;
+	if (len < 0)
+	{
+		ft_printf("Error\nFile is not a .ber file\n");
+		return (EXIT_FAILURE);
+	}
 	dif = ft_strncmp(&arg1[len], ".ber", 4);
 	if (dif != 0)
+	{
+		ft_printf("Error\nFile is not a .ber file\n");
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -42,6 +50,11 @@ char	*get_map(char *arg1)
 	char	*line;
 
 	fd = open(arg1, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Error\nSomething wrong with map file\n");
+		return (NULL);
+	}
 	line = get_next_line(fd);
 	reference = NULL;
 	while (line)
