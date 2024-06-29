@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 17:30:41 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:03:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,7 @@ mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
 	wall_texture = mlx_load_png(WALL_PATH);
 	collectible_texture = mlx_load_png(COLLECT_PATH);
 	exit_texture = mlx_load_png(EXIT_PATH);
-	s_stuff->wall = mlx_texture_to_image(window_file, wall_texture);
-	s_stuff->collectible = mlx_texture_to_image(window_file,
-			collectible_texture);
-	s_stuff->exit = mlx_texture_to_image(window_file, exit_texture);
-	mlx_delete_texture(wall_texture);
-	mlx_delete_texture(collectible_texture);
-	mlx_delete_texture(exit_texture);
+	make_image(s_stuff, wall_texture, collectible_texture, exit_texture);
 	while (map_file[letter])
 	{
 		if (map_file[letter] == '1')
@@ -172,26 +166,14 @@ int	valid_map_path_check(char *map_file, int position)
 		map_duplicate[position] = '1';
 		i = 0;
 	}
-	if (map_duplicate[position - first_line_size] != '1')
-	{
-		map_duplicate[position - first_line_size] = '1';
+	if (!check_and_flag(map_duplicate, position - first_line_size))
 		valid_map_path_check(map_duplicate, position - first_line_size);
-	}
-	if (map_duplicate[position + first_line_size] != '1')
-	{
-		map_duplicate[position + first_line_size] = '1';
+	if (!check_and_flag(map_duplicate, position + first_line_size))
 		valid_map_path_check(map_duplicate, position + first_line_size);
-	}
-	if (map_duplicate[position - 1] != '1')
-	{
-		map_duplicate[position - 1] = '1';
+	if (!check_and_flag(map_duplicate, position - 1))
 		valid_map_path_check(map_duplicate, position - 1);
-	}
-	if (map_duplicate[position + 1] != '1')
-	{
-		map_duplicate[position + 1] = '1';
+	if (!check_and_flag(map_duplicate, position + 1))
 		valid_map_path_check(map_duplicate, position + 1);
-	}
 	if (ft_strchr(map_duplicate, 'C') || ft_strchr(map_duplicate, 'E'))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

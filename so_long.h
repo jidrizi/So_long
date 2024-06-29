@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 16:36:56 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:02:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,9 @@ int				check_if_missing_element(char *reference);
 char			*create_proper_reference(char *current_line, char *reference,
 					int fd);
 int				check_if_endline_of_map_is_framed(char *map_file, int len);
+void			make_image(struct s_mlx_stuff *s_stuff,
+					mlx_texture_t *wall_texture,
+					mlx_texture_t *collectible_texture,
+					mlx_texture_t *exit_texture);
+int				check_and_flag(char *map_duplicate, int x);
 #endif
