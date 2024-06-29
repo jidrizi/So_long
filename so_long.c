@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:46:11 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:19:41 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	map = get_map(arg1);
 	if (!map)
 		return (1);
-	for_window = finder_of_width_height(map);
-	s_stuff->window = mlx_init(for_window[0], for_window[1], "so_long", true);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
@@ -100,6 +98,8 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 		ft_printf("Error\nMap has no valid path\n");
 		return (1);
 	}
+	for_window = finder_of_width_height(map);
+	s_stuff->window = mlx_init(for_window[0], for_window[1], "so_long", true);
 	s_stuff->player = put_png_in_map(map, s_stuff->window, s_stuff);
 	mlx_key_hook(s_stuff->window, &move_player_hook, (void *)s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);

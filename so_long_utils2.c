@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:38:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 13:56:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:16:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,15 @@ void	player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window)
 	}
 }
 
-// int	get_size_first_line(char *map_file)
-// {
-// 	int	i;
-// 	int	size_of_first_line;
+int	get_size_first_line(char *map_file)
+{
+	int	size_of_first_line;
 
-// 	i = 0;
-// 	size_of_first_line = 0;
-// 	while (map_file[i])
-// 	{
-// 		if (map_file[i] == '\n')
-// 		{
-// 			size_of_first_line = i;
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	return (size_of_first_line);
-// }
+	size_of_first_line = -1;
+	while (map_file[++size_of_first_line])
+	{
+		if (map_file[size_of_first_line] == '\n')
+			break ;
+	}
+	return (size_of_first_line);
+}

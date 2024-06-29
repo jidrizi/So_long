@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 13:05:01 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:03:40 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,38 +105,27 @@ int	check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-//eol = end of line
+//prev_eol = previous end of line and pos = position
 int	check_if_rectangle_map(char *map_file)
 {
-	int	line;
-	int	eol;
-	int	first_eol;
+	int	pos;
+	int	prev_eol;
+	const int	size_of_first_line = get_size_first_line(map_file);
 
-	line = 0;
-	eol = 0;
-	first_eol = 0;
-	while (map_file[line])
+	pos = size_of_first_line;
+	prev_eol = size_of_first_line;
+	while (map_file[++pos])
 	{
-		if (map_file[line] == '\n')
+		if (map_file[pos] == '\n')
 		{
-			first_eol = line;
-			eol = first_eol;
-			break ;
-		}
-		line++;
-	}
-	while (map_file[++line])
-	{
-		if (map_file[line] == '\n')
-		{
-			if (line - eol != first_eol + 1)
+			if (pos - prev_eol != size_of_first_line + 1)
 				return (EXIT_FAILURE);
-			eol = line;
+			prev_eol = pos;
 		}
 	}
-	if (map_file[line] == '\0')
+	if (map_file[pos] == '\0')
 	{
-		if (line - eol != first_eol + 1)
+		if (pos - prev_eol != size_of_first_line + 1)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
