@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:38:13 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:50:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,16 @@ int	check_if_rectangle_map(char *map_file)
 		if (map_file[pos] == '\n')
 		{
 			if (pos - prev_eol != size_of_first_line + 1)
-				return (EXIT_FAILURE);
+				return (ft_printf("Error\nMap is not a rectangle\n"),
+					EXIT_FAILURE);
 			prev_eol = pos;
 		}
 	}
 	if (map_file[pos] == '\0')
 	{
 		if (pos - prev_eol != size_of_first_line + 1)
-			return (EXIT_FAILURE);
+			return (ft_printf("Error\nMap is not a rectangle\n"),
+				EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

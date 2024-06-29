@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:19:41 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:51:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	if (!map)
 		return (1);
 	if (check_if_rectangle_map(map) == EXIT_FAILURE)
-	{
-		costum_free((void **)&map);
-		ft_printf("Error\nMap is not a rectangle\n");
-		return (1);
-	}
+		return (costum_free((void **)&map), 1);
 	if (wall_frame_check(map) == EXIT_FAILURE)
 	{
 		costum_free((void **)&map);
