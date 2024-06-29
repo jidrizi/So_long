@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 16:26:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:36:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ int				get_size_first_line(char *map_file);
 int				check_if_missing_element(char *reference);
 char			*create_proper_reference(char *current_line, char *reference,
 					int fd);
-int				check_if_middle_of_map_is_framed(char *map_file, int len);
+int				check_if_endline_of_map_is_framed(char *map_file, int len);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 16:22:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 17:03:40 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,19 +143,19 @@ int	wall_frame_check(char *map_file)
 	while (map_file[++letters])
 	{
 		if (map_file[letters] == '\n' && map_file[letters + 1] != '1')
-			return (EXIT_FAILURE);
+			return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
 		if (map_file[letters] == '\n')
 			break ;
 		if (map_file[letters] != '1')
-			return (EXIT_FAILURE);
+			return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
 	}
-	check_if_middle_of_map_is_framed(map_file, len);
+	check_if_endline_of_map_is_framed(map_file, len);
 	while (map_file[letters++])
 	{
 		if (map_file[letters] == '\n')
 		{
 			if (map_file[letters + 1] != '1' || map_file[letters - 1] != '1')
-				return (EXIT_FAILURE);
+				return (ft_printf("Error\nMap has no wall frame\n"), 1);
 		}
 	}
 	return (EXIT_SUCCESS);
