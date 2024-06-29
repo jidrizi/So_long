@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:54:23 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 21:19:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,67 +41,14 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(s_stuff1->window);
 		s_stuff1->escape = true;
 	}
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-	{
-		if (check_if_going_to_walls(s_stuff1->player->instances->x - 100,
-			s_stuff1->player->instances->y, s_stuff1->wall) == 1)
-			return ;
-		s_stuff1->player->instances->x -= 100;
-		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
-		if (check_if_all_collectibles_are_gone(s_stuff1->collectible) == true)
-		{
-			s_stuff1->exit->instances->enabled = true;
-			player_win(s_stuff1->player, s_stuff1->exit, s_stuff1->window);
-		}
-		moves++;
-		ft_printf("player moves: %d\n",moves);
-	}
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-	{
-		if (check_if_going_to_walls(s_stuff1->player->instances->x + 100,
-			 s_stuff1->player->instances->y, s_stuff1->wall) == 1)
-			return ;
-		s_stuff1->player->instances->x += 100;
-		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
-		if (check_if_all_collectibles_are_gone(s_stuff1->collectible) == true)
-		{
-			s_stuff1->exit->instances->enabled = true;
-			player_win(s_stuff1->player, s_stuff1->exit, s_stuff1->window);
-		}
-		moves++;
-		ft_printf("player moves: %d\n",moves);
-		
-	}
+		move_player_right(s_stuff1, &moves);
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		move_player_left(s_stuff1, &moves);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-	{
-		if (check_if_going_to_walls(s_stuff1->player->instances->x,
-			 s_stuff1->player->instances->y - 100, s_stuff1->wall) == 1)
-			 return ;
-		s_stuff1->player->instances->y -= 100;
-		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
-		if (check_if_all_collectibles_are_gone(s_stuff1->collectible) == true)
-		{
-			s_stuff1->exit->instances->enabled = true;
-			player_win(s_stuff1->player, s_stuff1->exit, s_stuff1->window);
-		}
-		moves++;
-		ft_printf("player moves: %d\n",moves);
-	}
+		move_player_up(s_stuff1, &moves);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-	{
-		if (check_if_going_to_walls(s_stuff1->player->instances->x,
-			 s_stuff1->player->instances->y + 100, s_stuff1->wall) == 1)
-			 return ;
-		s_stuff1->player->instances->y += 100;
-		check_if_touching_collectible(s_stuff1->player->instances->x, s_stuff1->player->instances->y,s_stuff1->collectible);
-		if (check_if_all_collectibles_are_gone(s_stuff1->collectible) == true)
-		{
-			s_stuff1->exit->instances->enabled = true;
-			player_win(s_stuff1->player, s_stuff1->exit, s_stuff1->window);
-		}
-		moves++;
-		ft_printf("player moves: %d\n",moves);
-	}
+		move_player_down(s_stuff1, &moves);
 }
 
 int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)

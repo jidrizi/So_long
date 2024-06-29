@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:51:41 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 21:24:06 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ int				when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
 					int letter, int xy[2]);
 int				when_player(char *map_file, struct s_mlx_stuff *s_stuff,
 					int letter, int xy[2]);
-// void			print_moves(int moves);
+void			print_moves(int *moves);
+void			move_player_right(struct s_mlx_stuff *s_stuff1, int *moves);
+void			move_player_left(struct s_mlx_stuff *s_stuff1, int *moves);
+void			move_player_up(struct s_mlx_stuff *s_stuff1, int *moves);
+void			move_player_down(struct s_mlx_stuff *s_stuff1, int *moves);
 #endif

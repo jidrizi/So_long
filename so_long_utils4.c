@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:51:36 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 21:25:05 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	when_player(char *map_file, struct s_mlx_stuff *s_stuff,
 	return (EXIT_SUCCESS);
 }
 
-// void	print_moves(int moves)
-// {
-// 	moves++;
-// 	ft_printf("player moves: %d\n", moves);
-// }
+void	print_moves(int *moves)
+{
+	*moves += 1;
+	ft_printf("player moves: %d\n", *moves);
+}
