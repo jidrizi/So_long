@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:50:56 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:22:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,14 +149,7 @@ int	wall_frame_check(char *map_file)
 		if (map_file[letters] != '1')
 			return (EXIT_FAILURE);
 	}
-	while (map_file[len] != '\n')
-	{
-		len--;
-		if (map_file[len] == '\n')
-			break ;
-		if (map_file[len] != '1')
-			return (EXIT_FAILURE);
-	}
+	check_if_middle_of_map_is_framed(map_file, len);
 	while (map_file[letters++])
 	{
 		if (map_file[letters] == '\n')

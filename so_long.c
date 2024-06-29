@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 16:03:47 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:20:11 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*get_map(char *arg1)
 {
 	int		fd;
 	char	*reference;
-	char	*temp_reference;
 	char	*current_line;
 
 	fd = open(arg1, O_RDONLY);
@@ -46,20 +45,10 @@ char	*get_map(char *arg1)
 		ft_printf("Error\nSomething wrong with map file\n");
 		return (NULL);
 	}
-	current_line = get_next_line(fd);
 	reference = NULL;
-	while (current_line)
-	{
-		temp_reference = reference;
-		reference = ft_strjoin(temp_reference, current_line);
-		if (!reference)
-			return (costum_free((void **)&current_line),
-				costum_free((void **)&temp_reference), NULL);
-		costum_free((void **)&current_line);
-		costum_free((void **)&temp_reference);
-		current_line = get_next_line(fd);
-	}
-	if (check_if_all_elements(reference, fd) == EXIT_FAILURE)
+	current_line = get_next_line(fd);
+	reference = create_proper_reference(current_line, reference, fd);
+	if (check_if_missing_element(reference) == EXIT_FAILURE)
 		return (costum_free((void **)&reference), close (fd), NULL);
 	if (check_ep_duplicates(reference))
 		return (costum_free((void **)&reference), close(fd), NULL);
