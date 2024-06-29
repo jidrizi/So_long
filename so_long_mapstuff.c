@@ -6,72 +6,39 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:03:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:44:55 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
+void	put_png_in_map(char *map_file, mlx_t *window_file,
 		struct s_mlx_stuff *s_stuff)
 {
-	int				letter;
-	int				x;
-	int				y;
-	mlx_image_t		*player;
-	mlx_texture_t	*wall_texture;
-	mlx_texture_t	*collectible_texture;
-	mlx_texture_t	*exit_texture;
+	int	letter;
+	int	i[2];
 
-	x = 0;
-	y = 0;
-	letter = 0;
-	wall_texture = mlx_load_png(WALL_PATH);
-	collectible_texture = mlx_load_png(COLLECT_PATH);
-	exit_texture = mlx_load_png(EXIT_PATH);
-	make_image(s_stuff, wall_texture, collectible_texture, exit_texture);
-	while (map_file[letter])
+	i[0] = 0;
+	i[1] = 0;
+	letter = -1;
+	while (map_file[++letter])
 	{
+		print_png(window_file, i[0], i[1], FLOOR_PATH);
 		if (map_file[letter] == '1')
-		{
-			mlx_image_to_window(window_file, s_stuff->wall, x, y);
-			x = x + 100;
-		}
-		if (map_file[letter] == '0')
-		{
-			print_png(window_file, x, y, FLOOR_PATH);
-			x = x + 100;
-		}
+			mlx_image_to_window(window_file, s_stuff->wall, i[0], i[1]);
 		if (map_file[letter] == 'C')
-		{
-			print_png(window_file, x, y, FLOOR_PATH);
-			mlx_image_to_window(window_file, s_stuff->collectible, x, y);
-			x = x + 100;
-		}
-		if (map_file[letter] == 'E')
-		{
-			print_png(window_file, x, y, FLOOR_PATH);
-			mlx_image_to_window(window_file, s_stuff->exit, x, y);
-			s_stuff->exit->instances->enabled = false;
-			x = x + 100;
-		}
-		if (map_file[letter] == 'P')
-		{
-			print_png(window_file, x, y, FLOOR_PATH);
-			s_stuff->player_x = x;
-			s_stuff->player_y = y;
-			x = x + 100;
-		}
+			mlx_image_to_window(window_file, s_stuff->collectible, i[0], i[1]);
+		when_exit(map_file, s_stuff, letter, i);
+		when_player(map_file, s_stuff, letter, i);
+		i[0] = i[0] + 100;
 		if (map_file[letter] == '\n')
 		{
-			x = 0;
-			y = y + 100;
+			i[0] = 0;
+			i[1] = i[1] + 100;
 		}
-		letter++;
 	}
-	player = print_png(window_file, s_stuff->player_x, s_stuff->player_y,
-			PLAYER_PATH);
-	return (player);
+	s_stuff->player = print_png(window_file, s_stuff->player_x,
+			s_stuff->player_y, PLAYER_PATH);
 }
 
 int	check_ep_duplicates(char *map_file)

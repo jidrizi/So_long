@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 19:59:43 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:27:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ int	check_if_endline_of_map_is_framed(char *map_file, int len)
 	return (EXIT_SUCCESS);
 }
 
-void	make_image(struct s_mlx_stuff *s_stuff, mlx_texture_t *wall_texture,
-			mlx_texture_t *collectible_texture, mlx_texture_t *exit_texture)
+void	make_image(struct s_mlx_stuff *s_stuff)
 {
-	s_stuff->wall = mlx_texture_to_image(s_stuff->window, wall_texture);
+	s_stuff->wall = mlx_texture_to_image(s_stuff->window,
+			s_stuff->wall_texture);
 	s_stuff->collectible = mlx_texture_to_image(s_stuff->window,
-			collectible_texture);
-	s_stuff->exit = mlx_texture_to_image(s_stuff->window, exit_texture);
+			s_stuff->collectible_texture);
+	s_stuff->exit = mlx_texture_to_image(s_stuff->window,
+			s_stuff->exit_texture);
 }
 
 int	check_and_flag(char *map_duplicate, int x)
@@ -58,4 +59,11 @@ int	check_and_flag(char *map_duplicate, int x)
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
+}
+
+void	make_textures(struct s_mlx_stuff *s_stuff)
+{
+	s_stuff->wall_texture = mlx_load_png(WALL_PATH);
+	s_stuff->collectible_texture = mlx_load_png(COLLECT_PATH);
+	s_stuff->exit_texture = mlx_load_png(EXIT_PATH);
 }

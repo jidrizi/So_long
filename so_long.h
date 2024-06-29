@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:02:59 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:51:41 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@
 // STRUCTS
 struct			s_mlx_stuff
 {
-	mlx_image_t	*player;
-	mlx_t		*window;
-	int			player_x;
-	int			player_y;
-	mlx_image_t	*wall;
-	mlx_image_t	*exit;
-	mlx_image_t	*collectible;
-	mlx_image_t	*victory;
-	bool		escape;
+	mlx_image_t		*player;
+	mlx_t			*window;
+	int				player_x;
+	int				player_y;
+	mlx_image_t		*wall;
+	mlx_image_t		*exit;
+	mlx_image_t		*collectible;
+	mlx_image_t		*victory;
+	bool			escape;
+	mlx_texture_t	*wall_texture;
+	mlx_texture_t	*collectible_texture;
+	mlx_texture_t	*exit_texture;
 };
 // PROTOTYPES
 int				check_ber(char *arg);
@@ -52,7 +55,7 @@ void			costum_free(void **ptr);
 char			*get_map(char *arg1);
 int				put_window(char *arg1, struct s_mlx_stuff *s_stuff);
 mlx_image_t		*print_png(mlx_t *window, int xaxis, int yaxis, char *path);
-mlx_image_t		*put_png_in_map(char *map_file, mlx_t *window_file,
+void			put_png_in_map(char *map_file, mlx_t *window_file,
 					struct s_mlx_stuff *s_file);
 int				check_ep_duplicates(char *map_file);
 int				check_if_rectangle_map(char *map_file);
@@ -73,9 +76,12 @@ int				check_if_missing_element(char *reference);
 char			*create_proper_reference(char *current_line, char *reference,
 					int fd);
 int				check_if_endline_of_map_is_framed(char *map_file, int len);
-void			make_image(struct s_mlx_stuff *s_stuff,
-					mlx_texture_t *wall_texture,
-					mlx_texture_t *collectible_texture,
-					mlx_texture_t *exit_texture);
+void			make_image(struct s_mlx_stuff *s_stuff);
 int				check_and_flag(char *map_duplicate, int x);
+void			make_textures(struct s_mlx_stuff *s_stuff);
+int				when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
+					int letter, int xy[2]);
+int				when_player(char *map_file, struct s_mlx_stuff *s_stuff,
+					int letter, int xy[2]);
+// void			print_moves(int moves);
 #endif
