@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/28 19:53:13 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 13:05:01 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	check_ep_duplicates(char *map_file)
 
 //eol = end of line
 int	check_if_rectangle_map(char *map_file)
-
 {
 	int	line;
 	int	eol;
