@@ -6,14 +6,14 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:03:40 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:38:13 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 mlx_image_t	*put_png_in_map(char *map_file, mlx_t *window_file,
-				struct s_mlx_stuff *s_stuff)
+		struct s_mlx_stuff *s_stuff)
 {
 	int				letter;
 	int				x;
@@ -105,11 +105,11 @@ int	check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-//prev_eol = previous end of line and pos = position
+// prev_eol = previous end of line and pos = position
 int	check_if_rectangle_map(char *map_file)
 {
-	int	pos;
-	int	prev_eol;
+	int			pos;
+	int			prev_eol;
 	const int	size_of_first_line = get_size_first_line(map_file);
 
 	pos = size_of_first_line;
@@ -166,7 +166,7 @@ int	wall_frame_check(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-//FLOOD
+// FLOOD
 int	valid_map_path_check(char *map_file, int position)
 {
 	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;

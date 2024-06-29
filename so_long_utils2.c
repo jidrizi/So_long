@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:38:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:16:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:38:28 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ bool	check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
 
 void	player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window)
 {
-	if (player->instances->x == exit->instances->x && player->instances->y
-		== exit->instances->y)
+	if (player->instances->x == exit->instances->x
+		&& player->instances->y == exit->instances->y)
 	{
 		mlx_close_window(window);
 	}
