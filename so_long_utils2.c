@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:38:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:38:28 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:03:34 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,15 @@ int	get_size_first_line(char *map_file)
 			break ;
 	}
 	return (size_of_first_line);
+}
+
+int	check_if_all_elements(char *reference, int fd)
+{
+	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E')
+		|| !ft_strchr(reference, 'C'))
+	{
+		ft_printf("Error\nMap is missing an element\n");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

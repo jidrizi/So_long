@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:38:37 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:00:26 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int				check_if_going_to_walls(int player_x, int player_y,
 int				*finder_of_width_height(char *map_file);
 void			check_if_touching_collectible(int player_x, int player_y,
 					mlx_image_t *collectible_image);
-bool			check_if_all_collectibles_are_gone(mlx_image_t *collectible_image);
+bool			check_if_all_collectibles_are_gone(
+					mlx_image_t *collectible_image);
 void			player_win(mlx_image_t *player, mlx_image_t *exit,
 					mlx_t *window);
 int				get_size_first_line(char *map_file);
+int				check_if_all_elements(char *reference, int fd);
 #endif

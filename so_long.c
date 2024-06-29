@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 15:54:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:03:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_map(char *arg1)
 	int		fd;
 	char	*reference;
 	char	*temp_reference;
-	char	*line;
+	char	*current_line;
 
 	fd = open(arg1, O_RDONLY);
 	if (fd == -1)
@@ -46,27 +46,21 @@ char	*get_map(char *arg1)
 		ft_printf("Error\nSomething wrong with map file\n");
 		return (NULL);
 	}
-	line = get_next_line(fd);
+	current_line = get_next_line(fd);
 	reference = NULL;
-	while (line)
+	while (current_line)
 	{
 		temp_reference = reference;
-		reference = ft_strjoin(temp_reference, line);
+		reference = ft_strjoin(temp_reference, current_line);
 		if (!reference)
-			return (costum_free((void **)&line),
+			return (costum_free((void **)&current_line),
 				costum_free((void **)&temp_reference), NULL);
-		costum_free((void **)&line);
+		costum_free((void **)&current_line);
 		costum_free((void **)&temp_reference);
-		line = get_next_line(fd);
+		current_line = get_next_line(fd);
 	}
-	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E')
-		|| !ft_strchr(reference, 'C'))
-	{
-		costum_free((void **)&reference);
-		ft_printf("Error\nMap is missing an element\n");
-		close(fd);
-		return (NULL);
-	}
+	if (check_if_all_elements(reference, fd) == EXIT_FAILURE)
+		return (costum_free((void **)&reference), close (fd), NULL);
 	if (check_ep_duplicates(reference))
 		return (costum_free((void **)&reference), close(fd), NULL);
 	return (close(fd), reference);
