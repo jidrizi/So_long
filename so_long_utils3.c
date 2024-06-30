@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:27:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 14:40:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ char	*create_proper_reference(char *current_line, char *reference, int fd)
 	{
 		temp_reference = reference;
 		reference = ft_strjoin(temp_reference, current_line);
-		if (!reference)
-			return (costum_free((void **)&current_line),
-				costum_free((void **)&temp_reference), NULL);
 		costum_free((void **)&current_line);
 		costum_free((void **)&temp_reference);
+		if (!reference)
+			return (NULL);
 		current_line = get_next_line(fd);
 	}
 	return (reference);
@@ -45,10 +44,16 @@ void	make_image(struct s_mlx_stuff *s_stuff)
 {
 	s_stuff->wall = mlx_texture_to_image(s_stuff->window,
 			s_stuff->wall_texture);
+	mlx_delete_texture(s_stuff->wall_texture);
 	s_stuff->collectible = mlx_texture_to_image(s_stuff->window,
 			s_stuff->collectible_texture);
+	mlx_delete_texture(s_stuff->collectible_texture);
 	s_stuff->exit = mlx_texture_to_image(s_stuff->window,
 			s_stuff->exit_texture);
+	mlx_delete_texture(s_stuff->exit_texture);
+	s_stuff->floor = mlx_texture_to_image(s_stuff->window,
+			s_stuff->floor_texture);
+	mlx_delete_texture(s_stuff->floor_texture);
 }
 
 int	check_and_flag(char *map_duplicate, int x)
@@ -66,4 +71,5 @@ void	make_textures(struct s_mlx_stuff *s_stuff)
 	s_stuff->wall_texture = mlx_load_png(WALL_PATH);
 	s_stuff->collectible_texture = mlx_load_png(COLLECT_PATH);
 	s_stuff->exit_texture = mlx_load_png(EXIT_PATH);
+	s_stuff->floor_texture = mlx_load_png(FLOOR_PATH);
 }

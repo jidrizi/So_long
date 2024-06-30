@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 21:24:06 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 14:45:22 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ struct			s_mlx_stuff
 	mlx_t			*window;
 	int				player_x;
 	int				player_y;
+	mlx_image_t		*floor;
 	mlx_image_t		*wall;
 	mlx_image_t		*exit;
 	mlx_image_t		*collectible;
 	mlx_image_t		*victory;
-	bool			escape;
+	bool			bad_ending;
+	mlx_texture_t	*floor_texture;
 	mlx_texture_t	*wall_texture;
 	mlx_texture_t	*collectible_texture;
 	mlx_texture_t	*exit_texture;

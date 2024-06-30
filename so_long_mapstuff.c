@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:44:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 14:39:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_png_in_map(char *map_file, mlx_t *window_file,
 	letter = -1;
 	while (map_file[++letter])
 	{
-		print_png(window_file, i[0], i[1], FLOOR_PATH);
+		mlx_image_to_window(window_file, s_stuff->floor, i[0], i[1]);
 		if (map_file[letter] == '1')
 			mlx_image_to_window(window_file, s_stuff->wall, i[0], i[1]);
 		if (map_file[letter] == 'C')
@@ -123,15 +123,14 @@ int	wall_frame_check(char *map_file)
 int	valid_map_path_check(char *map_file, int position)
 {
 	const int	first_line_size = (ft_strchr(map_file, '\n') - map_file) + 1;
-	static char	*map_duplicate;
-	static int	i = 1;
+	static char	*map_duplicate = NULL;
+	const int	player_pos = ft_strchr(map_file, 'P') - map_file;
 
-	if (i)
+	if (map_duplicate == NULL)
 	{
 		map_duplicate = ft_strdup(map_file);
 		position = ft_strchr(map_duplicate, 'P') - map_duplicate;
 		map_duplicate[position] = '1';
-		i = 0;
 	}
 	if (!check_and_flag(map_duplicate, position - first_line_size))
 		valid_map_path_check(map_duplicate, position - first_line_size);
@@ -141,7 +140,10 @@ int	valid_map_path_check(char *map_file, int position)
 		valid_map_path_check(map_duplicate, position - 1);
 	if (!check_and_flag(map_duplicate, position + 1))
 		valid_map_path_check(map_duplicate, position + 1);
-	if (ft_strchr(map_duplicate, 'C') || ft_strchr(map_duplicate, 'E'))
-		return (EXIT_FAILURE);
+	if ((ft_strchr(map_duplicate, 'C') || ft_strchr(map_duplicate, 'E'))
+		&& position == player_pos)
+		return (costum_free((void **)&map_duplicate), EXIT_FAILURE);
+	if (position == player_pos)
+		return (costum_free((void **)&map_duplicate), EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
