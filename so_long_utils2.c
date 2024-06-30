@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:38:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 16:10:24 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 15:33:35 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ bool	check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
 	return (true);
 }
 
-void	player_win(mlx_image_t *player, mlx_image_t *exit, mlx_t *window)
+void	player_win(struct s_mlx_stuff *s_stuff)
 {
-	if (player->instances->x == exit->instances->x
-		&& player->instances->y == exit->instances->y)
+	if (s_stuff->player->instances->x == s_stuff->exit->instances->x
+		&& s_stuff->player->instances->y == s_stuff->exit->instances->y)
 	{
-		mlx_close_window(window);
+		s_stuff->victory_ending = true;
+		mlx_close_window(s_stuff->window);
 	}
 }
 

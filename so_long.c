@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/29 20:31:06 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 15:37:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_loop(s_stuff->window);
 	mlx_terminate(s_stuff->window);
-	return (0);
+	return (costum_free((void **)&map), 0);
 }
 
 void	victory_hook(mlx_key_data_t keydata, void *param)
@@ -104,10 +104,13 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	if (check_ber(argv[1]))
 		return (EXIT_FAILURE);
+	s_stuff = ft_calloc(sizeof(struct s_mlx_stuff), 1);
+	if (!s_stuff)
+		return (EXIT_FAILURE);
 	if (put_window(argv[1], s_stuff) == 1)
 		return (EXIT_FAILURE);
-	if (s_stuff->escape == true)
-		return (0);
+	if (s_stuff->victory_ending == false)
+		return ((costum_free((void **)&s_stuff), 0));
 	victory_window = mlx_init(2000, 2000, "VICTORY", true);
 	victory_texture = mlx_load_png(VICTORY_PATH);
 	victory_image = mlx_texture_to_image(victory_window, victory_texture);
@@ -116,5 +119,5 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(victory_window, &victory_hook, victory_window);
 	mlx_loop(victory_window);
 	mlx_delete_image(victory_window, victory_image);
-	return (0);
+	return (costum_free((void **)&s_stuff), 0);
 }

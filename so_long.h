@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 14:45:22 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 15:30:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct			s_mlx_stuff
 	mlx_image_t		*exit;
 	mlx_image_t		*collectible;
 	mlx_image_t		*victory;
-	bool			bad_ending;
+	bool			victory_ending;
 	mlx_texture_t	*floor_texture;
 	mlx_texture_t	*wall_texture;
 	mlx_texture_t	*collectible_texture;
@@ -71,8 +71,7 @@ void			check_if_touching_collectible(int player_x, int player_y,
 					mlx_image_t *collectible_image);
 bool			check_if_all_collectibles_are_gone(
 					mlx_image_t *collectible_image);
-void			player_win(mlx_image_t *player, mlx_image_t *exit,
-					mlx_t *window);
+void			player_win(struct s_mlx_stuff *s_stuff);
 int				get_size_first_line(char *map_file);
 int				check_if_missing_element(char *reference);
 char			*create_proper_reference(char *current_line, char *reference,
