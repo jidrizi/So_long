@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 21:14:54 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/06/30 22:19:53 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		if (move_image != NULL)
 			move_image->instances->enabled = false;
 		mlx_delete_image(s_stuff1->window, move_image);
-		move_player_right(s_stuff1, &moves);
+		move_player(s_stuff1, &moves, RIGHT);
 		window_moves = ft_itoa(moves);
 		move_image = mlx_put_string(s_stuff1->window,(const char *)window_moves,
 				80, 0);
@@ -60,7 +60,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		if (move_image != NULL)
 			move_image->instances->enabled = false;
 		mlx_delete_image(s_stuff1->window, move_image);
-		move_player_left(s_stuff1, &moves);
+		move_player(s_stuff1, &moves, LEFT);
 		window_moves = ft_itoa(moves);
 		move_image = mlx_put_string(s_stuff1->window,(const char *)window_moves,
 				80, 0);
@@ -72,7 +72,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		if (move_image != NULL)
 			move_image->instances->enabled = false;
 		mlx_delete_image(s_stuff1->window, move_image);
-		move_player_up(s_stuff1, &moves);
+		move_player(s_stuff1, &moves, UP);
 		window_moves = ft_itoa(moves);
 		move_image = mlx_put_string(s_stuff1->window,(const char *)window_moves,
 				80, 0);
@@ -84,7 +84,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		if (move_image != NULL)
 			move_image->instances->enabled = false;
 		mlx_delete_image(s_stuff1->window, move_image);
-		move_player_down(s_stuff1, &moves);
+		move_player(s_stuff1, &moves, DOWN);
 		window_moves = ft_itoa(moves);
 		move_image = mlx_put_string(s_stuff1->window,(const char *)window_moves,
 				80, 0);
