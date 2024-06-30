@@ -31,13 +31,14 @@ bin/%.o : %.c $(DEPS) | bin
 	$(CC) -c -o $@ $< $(CFLAGS) $(HEADER)
 
 $(LIBMLX)/build/libmlx42.a:
+	@git submodule update --init
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 ./libft/libft.a:
 	@make -C ./libft
 
-$(NAME): $(OBJS) $(LIBMLX)/build/libmlx42.a ./libft/libft.a
-	$(CC) -o $(NAME) $(LIB) $(OBJS) $(HEADER)
+$(NAME): $(LIBMLX)/build/libmlx42.a ./libft/libft.a $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(LIB) -ldl $(HEADER)
 
 clean:
 	@rm -fr bin/*
