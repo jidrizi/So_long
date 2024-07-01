@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 22:31:14 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:32:00 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	if (s_stuff->victory_ending == false)
 		return ((costum_free((void **)&s_stuff), 0));
-	make_victory_window(void);
+	make_victory_window();
 	return (costum_free((void **)&s_stuff), 0);
 }

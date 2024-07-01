@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/07/01 22:14:37 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/07/01 22:46:30 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ SRC_BONUS = bonus/so_long_bonus.c bonus/so_long_utils_bonus.c bonus/so_long_util
 OBJS = $(SRC:%.c=bin/%.o)
 OBJS_BONUS = $(SRC_BONUS:%.c=bin/%.o)
 
-all: clean_when_debug $(NAME)
-all_bonus: clean_when_debug $(NAME_BONUS)
+all: clean_when_debug $(NAME) $(NAME_BONUS)
 
 bin/bonus:
 	@mkdir -p bin/bonus
@@ -52,7 +51,6 @@ $(NAME_BONUS): $(LIBMLX)/build/libmlx42.a ./libft/libft.a $(OBJS_BONUS) $(BONUS_
 
 clean:
 	@rm -fr bin/*
-	@rm -fr bonus_bin/*
 	@echo "washing my balls rn"
 
 fclean: clean

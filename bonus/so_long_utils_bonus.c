@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:03:23 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:41:06 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 	s_stuff1 = (struct s_mlx_stuff *)param;
 	s_stuff1->victory_ending = false;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
 		mlx_close_window(s_stuff1->window);
-	}
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		display_moves(s_stuff1, RIGHT);
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
@@ -47,6 +45,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		display_moves(s_stuff1, UP);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 		display_moves(s_stuff1, DOWN);
+	every_other_move(s_stuff1);
 }
 
 int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
