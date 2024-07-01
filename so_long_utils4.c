@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 22:41:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 12:59:52 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 		player_x -= 100;
 	if (direction == RIGHT)
 		player_x += 100;
-	s_stuff->player->instances->x = player_x;
-	s_stuff->player->instances->y = player_y;
 	if (check_if_going_to_walls(player_x, player_y, s_stuff->wall) == 1)
 		return ;
+	s_stuff->player->instances->x = player_x;
+	s_stuff->player->instances->y = player_y;
 	check_if_touching_collectible(player_x, player_y, s_stuff->collectible);
 	if (check_if_all_collectibles_are_gone(s_stuff->collectible) == true)
 	{
@@ -66,4 +66,9 @@ void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 		player_win(s_stuff);
 	}
 	print_moves(moves);
+}
+void display_moves()
+{
+
+	
 }
