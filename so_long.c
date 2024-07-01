@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 15:38:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:25:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	return (costum_free((void **)&map), 0);
 }
 
-void	victory_hook(mlx_key_data_t keydata, void *param)
+static void	victory_hook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
