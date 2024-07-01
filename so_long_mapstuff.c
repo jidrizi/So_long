@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 13:41:08 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 14:29:01 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	put_png_in_map(char *map_file, mlx_t *window_file,
 	}
 	s_stuff->player = print_png(window_file, s_stuff->player_x,
 			s_stuff->player_y, PLAYER_PATH);
-	mlx_put_string(window_file,"MOVES:", 0, 0);
+	mlx_put_string(window_file, "MOVES:", 0, 0);
 }
 
 int	check_ep_duplicates(char *map_file)

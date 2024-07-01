@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 14:21:34 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 14:28:28 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 {
 	struct s_mlx_stuff	*s_stuff1;
 	static int			moves = 0;
-	
+
 	s_stuff1 = (struct s_mlx_stuff *)param;
 	s_stuff1->victory_ending = false;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
