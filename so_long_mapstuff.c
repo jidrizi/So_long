@@ -6,12 +6,13 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 21:15:52 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 13:41:08 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+//i[0] = the x axis and i[1] = the y axis
 void	put_png_in_map(char *map_file, mlx_t *window_file,
 		struct s_mlx_stuff *s_stuff)
 {
