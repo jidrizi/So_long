@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils3.c                                   :+:      :+:    :+:   */
+/*   so_long_utils3_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 14:40:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 20:03:34 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 char	*create_proper_reference(char *current_line, char *reference, int fd)
 {

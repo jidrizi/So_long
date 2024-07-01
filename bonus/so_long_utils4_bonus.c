@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils4.c                                   :+:      :+:    :+:   */
+/*   so_long_utils4_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 19:37:36 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 20:03:38 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
 	int letter, int xy[2])

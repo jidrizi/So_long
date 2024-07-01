@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_mapstuff.c                                 :+:      :+:    :+:   */
+/*   so_long_mapstuff_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 14:29:01 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 20:03:44 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 //i[0] = the x axis and i[1] = the y axis
 void	put_png_in_map(char *map_file, mlx_t *window_file,

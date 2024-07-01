@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 14:29:13 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/01 20:01:23 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_moves(int *moves)
 	ft_printf("player moves: %d\n", *moves);
 }
 
-void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
+void	 move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 {
 	int	player_x;
 	int	player_y;
@@ -68,25 +68,3 @@ void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 	print_moves(moves);
 }
 
-void	display_moves(int	*moves, struct s_mlx_stuff *s_stuff, int direction)
-{
-	static mlx_image_t	*image_of_moves;
-	char				*itoa_moves;
-
-	if (image_of_moves != NULL)
-		image_of_moves->instances->enabled = false;
-	mlx_delete_image(s_stuff->window, image_of_moves);
-	if (direction == UP)
-		move_player(s_stuff, moves, UP);
-	if (direction == DOWN)
-		move_player(s_stuff, moves, DOWN);
-	if (direction == LEFT)
-		move_player(s_stuff, moves, LEFT);
-	if (direction == RIGHT)
-		move_player(s_stuff, moves, RIGHT);
-	itoa_moves = ft_itoa(*moves);
-	image_of_moves = mlx_put_string(s_stuff->window, (const char *)itoa_moves,
-			80, 0);
-	if (itoa_moves)
-		free (itoa_moves);
-}
