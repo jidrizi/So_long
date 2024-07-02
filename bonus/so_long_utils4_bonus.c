@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:03:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:49:50 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	display_moves(struct s_mlx_stuff *s_stuff, int direction)
 	if (direction == UP)
 		move_player(s_stuff, UP);
 	if (direction == DOWN)
-		move_player(s_stuff,DOWN);
+		move_player(s_stuff, DOWN);
 	if (direction == LEFT)
-		move_player(s_stuff,LEFT);
+		move_player(s_stuff, LEFT);
 	if (direction == RIGHT)
 		move_player(s_stuff, RIGHT);
 	itoa_moves = ft_itoa(s_stuff->moves);
