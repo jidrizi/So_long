@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:49:50 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:54:33 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	when_player(char *map_file, struct s_mlx_stuff *s_stuff,
 	if (map_file[letter] == 'P')
 	{
 		s_stuff->player_x = xy[0];
-		s_stuff->player_y = xy[1];
+		s_stuff->player_y = xy[1] + 40;
 	}
 	return (EXIT_SUCCESS);
 }

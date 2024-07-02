@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 22:41:06 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:56:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
 	pos = -1;
 	while (wall_image->count > ++pos)
 	{
-		if (player_x == wall_image->instances[pos].x && player_y
+		if (player_x == wall_image->instances[pos].x && player_y - 40
 			== wall_image->instances[pos].y)
 		{
 			return (1);
@@ -95,7 +95,7 @@ void	check_if_touching_collectible(int player_x, int player_y,
 	pos = -1;
 	while (collectible_image->count > ++pos)
 	{
-		if (player_x == collectible_image->instances[pos].x && player_y
+		if (player_x == collectible_image->instances[pos].x && player_y -40
 			== collectible_image->instances[pos].y)
 		{
 			collectible_image->instances[pos].enabled = false;
