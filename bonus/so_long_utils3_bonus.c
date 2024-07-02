@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:48:27 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:12:01 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void	make_image(struct s_mlx_stuff *s_stuff)
 	mlx_delete_texture(s_stuff->animation_texture);
 	mlx_image_to_window(s_stuff->window, s_stuff->animation, 0, 0);
 	s_stuff->animation->instances->enabled = true;
+	s_stuff->enemy = mlx_texture_to_image(s_stuff->window,
+			s_stuff->enemy_texture);
+	mlx_delete_texture(s_stuff->enemy_texture);
+	mlx_image_to_window(s_stuff->window, s_stuff->enemy, 600, 600);
 }
 
 int	check_and_flag(char *map_duplicate, int x)
@@ -73,6 +77,7 @@ int	check_and_flag(char *map_duplicate, int x)
 
 void	make_textures(struct s_mlx_stuff *s_stuff)
 {
+	s_stuff->enemy_texture = mlx_load_png(ENEMY_PATH);
 	s_stuff->animation_texture = mlx_load_png(ANIMATION_PATH);
 	s_stuff->wall_texture = mlx_load_png(WALL_PATH);
 	s_stuff->collectible_texture = mlx_load_png(COLLECT_PATH);

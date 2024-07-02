@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 13:47:06 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 18:10:25 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include "libft.h"
 
 // MACROS
-// # define WIDTH 5120
-// # define HEIGHT 2880
 # define WALL_PATH "./png/wall.png"
 # define FLOOR_PATH "./png/floor.png"
 # define EXIT_PATH "./png/exit.png"
@@ -34,6 +32,7 @@
 # define ANIMATION_PATH "./png/animation.png"
 # define COLLECT_PATH "./png/Collectible.png"
 # define VICTORY_PATH "./png/victory.png"
+# define ENEMY_PATH "./png/Enemy.png"
 // STRUCTS
 struct			s_mlx_stuff
 {
@@ -54,6 +53,8 @@ struct			s_mlx_stuff
 	int				moves;
 	mlx_texture_t	*animation_texture;
 	mlx_image_t		*animation;
+	mlx_image_t		*enemy;
+	mlx_texture_t	*enemy_texture;
 };
 // ENUMS
 enum e_direction
@@ -103,4 +104,5 @@ void			display_moves(struct s_mlx_stuff *s_stuff, int direction);
 void			make_victory_window(void);
 void			victory_hook(mlx_key_data_t keydata, void *param);
 void			every_other_move(struct s_mlx_stuff *s_stuff);
+void			move_enemy(struct s_mlx_stuff *s_stuff);
 #endif

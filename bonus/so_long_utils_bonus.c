@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:56:47 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 18:10:18 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	move_player_hook(mlx_key_data_t keydata, void *param)
 		display_moves(s_stuff1, UP);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 		display_moves(s_stuff1, DOWN);
+	move_enemy(s_stuff1);
 	every_other_move(s_stuff1);
 }
 
