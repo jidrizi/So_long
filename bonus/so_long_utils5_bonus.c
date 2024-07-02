@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 22:11:54 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 19:37:14 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:26:24 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,16 @@ void	move_enemy(struct s_mlx_stuff *s_stuff)
 		mov_dir = VERTICAL;
 	if (mov_dir == VERTICAL)
 		move_enemy_vert(s_stuff);
+}
+void	check_defeat_condition(void *param)
+{
+	struct s_mlx_stuff	*s_stuff;
+
+	s_stuff = (struct s_mlx_stuff *)param;
+	if (s_stuff->player->instances->x == s_stuff->enemy->instances->x
+		&& s_stuff->player->instances->y  == s_stuff->enemy->instances->y + 40) /// do i need to add the 40 pixels to player y?
+	{
+		mlx_close_window(s_stuff->window);
+		make_defeat_window();
+	}
 }

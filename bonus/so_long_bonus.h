@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 18:10:25 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:29:00 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define COLLECT_PATH "./png/Collectible.png"
 # define VICTORY_PATH "./png/victory.png"
 # define ENEMY_PATH "./png/Enemy.png"
+# define DEFEAT_PATH "./png/defeat.png"
 // STRUCTS
 struct			s_mlx_stuff
 {
@@ -105,4 +106,6 @@ void			make_victory_window(void);
 void			victory_hook(mlx_key_data_t keydata, void *param);
 void			every_other_move(struct s_mlx_stuff *s_stuff);
 void			move_enemy(struct s_mlx_stuff *s_stuff);
+void			check_defeat_condition(void *param);
+void			make_defeat_window(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 19:46:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 20:59:30 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	move_player(struct s_mlx_stuff *s_stuff, int direction)
 		s_stuff->exit->instances->enabled = true;
 		player_win(s_stuff);
 	}
-	print_moves(&(*s_stuff).moves);
+	print_moves(&s_stuff->moves);
 }
 
 void	display_moves(struct s_mlx_stuff *s_stuff, int direction)

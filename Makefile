@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/07/01 22:46:30 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/07/02 21:29:43 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BONUS_DEPS = bonus/so_long_bonus.h
 SRC = so_long.c so_long_utils.c so_long_utils2.c so_long_utils3.c \
 		so_long_mapstuff.c so_long_utils4.c
 SRC_BONUS = bonus/so_long_bonus.c bonus/so_long_utils_bonus.c bonus/so_long_utils2_bonus.c bonus/so_long_utils3_bonus.c\
-			bonus/so_long_mapstuff_bonus.c bonus/so_long_utils4_bonus.c bonus/so_long_utils5_bonus.c
+			bonus/so_long_mapstuff_bonus.c bonus/so_long_utils4_bonus.c bonus/so_long_utils5_bonus.c bonus/so_long_defeat.c
 OBJS = $(SRC:%.c=bin/%.o)
 OBJS_BONUS = $(SRC_BONUS:%.c=bin/%.o)
 
