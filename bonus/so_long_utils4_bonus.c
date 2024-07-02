@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:54:33 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:46:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void	display_moves(struct s_mlx_stuff *s_stuff, int direction)
 			80, 0);
 	if (itoa_moves)
 		free (itoa_moves);
+	move_enemy(s_stuff);
 }

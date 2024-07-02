@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 22:11:54 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:54:28 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:37:14 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,59 @@ void	every_other_move(struct s_mlx_stuff *s_stuff)
 		s_stuff->player->instances->enabled = true;
 		s_stuff->animation->instances->enabled = false;
 	}
+}
+
+enum e_enemy_direction
+{
+	NONE,
+	HORIZONTAL,
+	VERTICAL
+};
+
+static void	move_enemy_vert(struct s_mlx_stuff *s_stuff)
+{
+	static int	state = UP;
+
+	if (check_if_going_to_walls(s_stuff->enemy->instances->x,
+		s_stuff->enemy->instances->y + 140, s_stuff->wall) == 0 && state != DOWN)
+	{
+		s_stuff->enemy->instances->y += 100;
+	}
+	else if (check_if_going_to_walls(s_stuff->enemy->instances->x,
+		s_stuff->enemy->instances->y - 60, s_stuff->wall) == 0)
+	{
+		s_stuff->enemy->instances->y -= 100;
+		state = DOWN;
+	}
+	else
+		state = UP;
+}
+
+void	move_enemy(struct s_mlx_stuff *s_stuff)
+{
+	static int	mov_dir = NONE;
+	static int	state = RIGHT;
+
+	if (check_if_going_to_walls(s_stuff->enemy->instances->x + 100,
+		s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
+		&& state != LEFT && mov_dir != VERTICAL)
+	{
+		s_stuff->enemy->instances->x += 100;
+		if (mov_dir == NONE)
+			mov_dir = HORIZONTAL;
+	}
+	else if (check_if_going_to_walls(s_stuff->enemy->instances->x - 100,
+		s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
+		&& mov_dir != VERTICAL  && (state == LEFT || state-- == RIGHT))
+	{
+		s_stuff->enemy->instances->x -= 100;
+		if (mov_dir == NONE)
+			mov_dir = HORIZONTAL;
+	}
+	else
+		state = RIGHT;
+	if (mov_dir == NONE)
+		mov_dir = VERTICAL;
+	if (mov_dir == VERTICAL)
+		move_enemy_vert(s_stuff);
 }

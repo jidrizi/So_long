@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 18:10:18 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:46:11 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,23 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 
 void	move_player_hook(mlx_key_data_t keydata, void *param)
 {
-	struct s_mlx_stuff	*s_stuff1;
+	struct s_mlx_stuff	*s_stuff;
 
-	s_stuff1 = (struct s_mlx_stuff *)param;
-	s_stuff1->victory_ending = false;
+	s_stuff = (struct s_mlx_stuff *)param;
+	s_stuff->victory_ending = false;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(s_stuff1->window);
+		mlx_close_window(s_stuff->window);
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		display_moves(s_stuff1, RIGHT);
+		display_moves(s_stuff, RIGHT);
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		display_moves(s_stuff1, LEFT);
+		display_moves(s_stuff, LEFT);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		display_moves(s_stuff1, UP);
+		display_moves(s_stuff, UP);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		display_moves(s_stuff1, DOWN);
-	move_enemy(s_stuff1);
-	every_other_move(s_stuff1);
+		display_moves(s_stuff, DOWN);
+	mlx_set_instance_depth(s_stuff->enemy->instances,
+		s_stuff->player->instances->z);
+	every_other_move(s_stuff);
 }
 
 int	check_if_going_to_walls(int player_x, int player_y, mlx_image_t *wall_image)
