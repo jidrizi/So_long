@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 21:11:16 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:34:42 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	if (wall_frame_check(map) == EXIT_FAILURE)
 		return (costum_free((void **)&map), 1);
 	if (valid_map_path_check(map, 0) == EXIT_FAILURE)
-	{
-		ft_printf("Error\nMap has no valid path\n");
-		return (costum_free((void **)&map), 1);
-	}
+		return (ft_printf("Error\nMap has no valid path\n"),
+			costum_free((void **)&map), 1);
 	for_window = finder_of_width_height(map);
 	s_stuff->window = mlx_init(for_window[0], for_window[1], "so_long", true);
 	make_textures(s_stuff);

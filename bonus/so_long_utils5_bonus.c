@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 22:11:54 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 21:26:24 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:32:58 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ static void	move_enemy_vert(struct s_mlx_stuff *s_stuff)
 	static int	state = UP;
 
 	if (check_if_going_to_walls(s_stuff->enemy->instances->x,
-		s_stuff->enemy->instances->y + 140, s_stuff->wall) == 0 && state != DOWN)
+			s_stuff->enemy->instances->y + 140,
+			s_stuff->wall) == 0 && state != DOWN)
 	{
 		s_stuff->enemy->instances->y += 100;
 	}
 	else if (check_if_going_to_walls(s_stuff->enemy->instances->x,
-		s_stuff->enemy->instances->y - 60, s_stuff->wall) == 0)
+			s_stuff->enemy->instances->y - 60, s_stuff->wall) == 0)
 	{
 		s_stuff->enemy->instances->y -= 100;
 		state = DOWN;
@@ -78,7 +79,7 @@ void	move_enemy(struct s_mlx_stuff *s_stuff)
 	static int	state = RIGHT;
 
 	if (check_if_going_to_walls(s_stuff->enemy->instances->x + 100,
-		s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
+			s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
 		&& state != LEFT && mov_dir != VERTICAL)
 	{
 		s_stuff->enemy->instances->x += 100;
@@ -86,8 +87,8 @@ void	move_enemy(struct s_mlx_stuff *s_stuff)
 			mov_dir = HORIZONTAL;
 	}
 	else if (check_if_going_to_walls(s_stuff->enemy->instances->x - 100,
-		s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
-		&& mov_dir != VERTICAL  && (state == LEFT || state-- == RIGHT))
+			s_stuff->enemy->instances->y + 40, s_stuff->wall) == 0
+		&& mov_dir != VERTICAL && (state == LEFT || state-- == RIGHT))
 	{
 		s_stuff->enemy->instances->x -= 100;
 		if (mov_dir == NONE)
@@ -100,13 +101,14 @@ void	move_enemy(struct s_mlx_stuff *s_stuff)
 	if (mov_dir == VERTICAL)
 		move_enemy_vert(s_stuff);
 }
+
 void	check_defeat_condition(void *param)
 {
 	struct s_mlx_stuff	*s_stuff;
 
 	s_stuff = (struct s_mlx_stuff *)param;
 	if (s_stuff->player->instances->x == s_stuff->enemy->instances->x
-		&& s_stuff->player->instances->y  == s_stuff->enemy->instances->y + 40) /// do i need to add the 40 pixels to player y?
+		&& s_stuff->player->instances->y == s_stuff->enemy->instances->y + 40)
 	{
 		mlx_close_window(s_stuff->window);
 		make_defeat_window();
