@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 22:11:54 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:44:43 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:48:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	every_other_move(struct s_mlx_stuff *s_stuff)
 {
 	s_stuff->animation->instances->x = s_stuff->player->instances->x;
 	s_stuff->animation->instances->y = s_stuff->player->instances->y;
-	mlx_set_instance_depth(s_stuff->animation->instances, s_stuff->player->instances->z);
+	mlx_set_instance_depth(s_stuff->animation->instances,
+		s_stuff->player->instances->z);
 	if (s_stuff->moves % 2 != 0)
 	{
 		s_stuff->player->instances->enabled = false;

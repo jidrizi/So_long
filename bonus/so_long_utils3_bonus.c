@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 14:43:42 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:48:27 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	make_image(struct s_mlx_stuff *s_stuff)
 	s_stuff->floor = mlx_texture_to_image(s_stuff->window,
 			s_stuff->floor_texture);
 	mlx_delete_texture(s_stuff->floor_texture);
-	s_stuff->animation = mlx_texture_to_image(s_stuff->window, 
-		s_stuff->animation_texture);
+	s_stuff->animation = mlx_texture_to_image(s_stuff->window,
+			s_stuff->animation_texture);
 	mlx_delete_texture(s_stuff->animation_texture);
 	mlx_image_to_window(s_stuff->window, s_stuff->animation, 0, 0);
 	s_stuff->animation->instances->enabled = true;
