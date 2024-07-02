@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:00:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 13:44:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 // MACROS
 // # define WIDTH 5120
 // # define HEIGHT 2880
-# define WALL_PATH "/Users/jidrizi/lol/thanks_for_fish/png/wall.png"
-# define FLOOR_PATH "/Users/jidrizi/lol/thanks_for_fish/png/floor.png"
-# define EXIT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/exit.png"
-# define PLAYER_PATH "/Users/jidrizi/lol/thanks_for_fish/png/playerchar2.png"
-# define COLLECT_PATH "/Users/jidrizi/lol/thanks_for_fish/png/Collectible.png"
-# define VICTORY_PATH "/Users/jidrizi/lol/thanks_for_fish/png/victory.png"
+# define WALL_PATH "./png/wall.png"
+# define FLOOR_PATH "./png/floor.png"
+# define EXIT_PATH "./png/exit.png"
+# define PLAYER_PATH "./png/playerchar2.png"
+# define COLLECT_PATH "./png/Collectible.png"
+# define VICTORY_PATH "./png/victory.png"
 // STRUCTS
 struct			s_mlx_stuff
 {

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 22:11:54 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 22:57:50 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:44:43 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,20 @@ void	make_victory_window(void)
 	mlx_loop(victory_window);
 	mlx_delete_image(victory_window, victory_image);
 }
+
 void	every_other_move(struct s_mlx_stuff *s_stuff)
 {
-	s_stuff->player2->instances->x = s_stuff->player->instances->x;
-	s_stuff->player2->instances->y = s_stuff->player->instances->y;
+	s_stuff->animation->instances->x = s_stuff->player->instances->x;
+	s_stuff->animation->instances->y = s_stuff->player->instances->y;
+	mlx_set_instance_depth(s_stuff->animation->instances, s_stuff->player->instances->z);
 	if (s_stuff->moves % 2 != 0)
+	{
 		s_stuff->player->instances->enabled = false;
+		s_stuff->animation->instances->enabled = true;
+	}
 	else
+	{
 		s_stuff->player->instances->enabled = true;
+		s_stuff->animation->instances->enabled = false;
+	}
 }
