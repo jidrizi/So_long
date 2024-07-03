@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 13:44:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:16:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				check_ep_duplicates(char *map_file);
 int				check_if_rectangle_map(char *map_file);
 int				wall_frame_check(char *map_file);
 int				valid_map_path_check(char *map_file, int position);
-void			move_player_hook(mlx_key_data_t keydata, void *param);
+void			player_hook(mlx_key_data_t keydata, void *param);
 int				check_if_going_to_walls(int player_x, int player_y,
 					mlx_image_t *wall_image);
 int				*finder_of_width_height(char *map_file);

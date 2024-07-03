@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 22:25:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:16:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	make_textures(s_stuff);
 	make_image(s_stuff);
 	put_png_in_map(map, s_stuff->window, s_stuff);
-	mlx_key_hook(s_stuff->window, &move_player_hook, (void *)s_stuff);
+	mlx_key_hook(s_stuff->window, &player_hook, (void *)s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_loop(s_stuff->window);
 	mlx_terminate(s_stuff->window);

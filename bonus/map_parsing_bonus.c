@@ -1,72 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_mapstuff_bonus.c                           :+:      :+:    :+:   */
+/*   map_parsing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:03:44 by jidrizi          ###   ########.fr       */
+/*   Created: 2024/07/03 15:01:32 by jidrizi           #+#    #+#             */
+/*   Updated: 2024/07/03 15:41:39 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-//i[0] = the x axis and i[1] = the y axis
-void	put_png_in_map(char *map_file, mlx_t *window_file,
-		struct s_mlx_stuff *s_stuff)
-{
-	int	letter;
-	int	i[2];
-
-	i[0] = 0;
-	i[1] = 0;
-	letter = -1;
-	while (map_file[++letter])
-	{
-		mlx_image_to_window(window_file, s_stuff->floor, i[0], i[1]);
-		if (map_file[letter] == '1')
-			mlx_image_to_window(window_file, s_stuff->wall, i[0], i[1]);
-		if (map_file[letter] == 'C')
-			mlx_image_to_window(window_file, s_stuff->collectible, i[0], i[1]);
-		when_exit(map_file, s_stuff, letter, i);
-		when_player(map_file, s_stuff, letter, i);
-		i[0] = i[0] + 100;
-		if (map_file[letter] == '\n')
-		{
-			i[0] = 0;
-			i[1] = i[1] + 100;
-		}
-	}
-	s_stuff->player = print_png(window_file, s_stuff->player_x,
-			s_stuff->player_y, PLAYER_PATH);
-	mlx_put_string(window_file, "MOVES:", 0, 0);
-}
-
-int	check_ep_duplicates(char *map_file)
-{
-	int	p;
-	int	e;
-	int	position;
-
-	p = 0;
-	e = 0;
-	position = 0;
-	while (map_file[position])
-	{
-		if (map_file[position] == 'E')
-			e++;
-		if (map_file[position] == 'P')
-			p++;
-		position++;
-	}
-	if (e != 1 || p != 1 || (e != 1 && p != 1))
-	{
-		ft_printf("Error\nOnly one E or P allowed\n");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
 
 // prev_eol = previous end of line and pos = position
 int	check_if_rectangle_map(char *map_file)
@@ -96,6 +40,16 @@ int	check_if_rectangle_map(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
+static int	check_if_endline_of_map_is_framed(char *map_file, int len)
+{
+	while (map_file[--len] != '\n')
+	{
+		if (map_file[len] != '1')
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	wall_frame_check(char *map_file)
 {
 	int	letters;
@@ -119,6 +73,16 @@ int	wall_frame_check(char *map_file)
 	if (check_if_endline_of_map_is_framed(map_file, len) == EXIT_FAILURE)
 		return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+static int	check_and_flag(char *map_duplicate, int x)
+{
+	if (map_duplicate[x] != '1')
+	{
+		map_duplicate[x] = '1';
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
 }
 
 // FLOOD

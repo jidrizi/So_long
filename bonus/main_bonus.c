@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_bonus.c                                    :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 21:34:42 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:49:43 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	check_ber(char *arg1)
+static int	*finder_of_width_height(char *map_file)
+{
+	int	width;
+	int	pos;
+	int	height;
+
+	width = 0;
+	height = 0;
+	while (map_file[width] != '\n')
+		width++;
+	height++;
+	pos = width;
+	while (map_file[pos])
+	{
+		if (map_file[pos] == '\n')
+			height++;
+		pos++;
+	}
+	height = height * 100;
+	width = width * 100;
+	return ((int [2]){width, height});
+}
+
+static int	check_ber(char *arg1)
 {
 	int	len;
 	int	dif;
@@ -33,29 +56,7 @@ int	check_ber(char *arg1)
 	return (EXIT_SUCCESS);
 }
 
-char	*get_map(char *arg1)
-{
-	int		fd;
-	char	*reference;
-	char	*current_line;
-
-	fd = open(arg1, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("Error\nSomething wrong with map file\n");
-		return (NULL);
-	}
-	reference = NULL;
-	current_line = get_next_line(fd);
-	reference = create_proper_reference(current_line, reference, fd);
-	if (check_if_missing_element(reference) == EXIT_FAILURE)
-		return (costum_free((void **)&reference), close (fd), NULL);
-	if (check_ep_duplicates(reference))
-		return (costum_free((void **)&reference), close(fd), NULL);
-	return (close(fd), reference);
-}
-
-int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
+static int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 {
 	char	*map;
 	int		*for_window;
@@ -75,20 +76,13 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	make_textures(s_stuff);
 	make_image(s_stuff);
 	put_png_in_map(map, s_stuff->window, s_stuff);
-	mlx_key_hook(s_stuff->window, &move_player_hook, (void *)s_stuff);
+	mlx_image_to_window(s_stuff->window, s_stuff->enemy, 100, 100);
+	mlx_key_hook(s_stuff->window, &player_hook, (void *)s_stuff);
 	mlx_loop_hook(s_stuff->window, &check_defeat_condition, (void *)s_stuff);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_loop(s_stuff->window);
 	mlx_terminate(s_stuff->window);
 	return (costum_free((void **)&map), 0);
-}
-
-void	victory_hook(mlx_key_data_t keydata, void *param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		mlx_close_window((mlx_t *)param);
-	}
 }
 
 int	main(int argc, char *argv[])

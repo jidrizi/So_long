@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:02:03 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:16:15 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ mlx_image_t	*print_png(mlx_t *window, int xaxis, int yaxis, char *path)
 	return (image);
 }
 
-void	move_player_hook(mlx_key_data_t keydata, void *param)
+void	player_hook(mlx_key_data_t keydata, void *param)
 {
 	struct s_mlx_stuff	*s_stuff1;
 	static int			moves = 0;

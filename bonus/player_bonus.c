@@ -1,43 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils4_bonus.c                             :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/02 20:59:30 by jidrizi          ###   ########.fr       */
+/*   Created: 2024/07/03 15:19:10 by jidrizi           #+#    #+#             */
+/*   Updated: 2024/07/03 16:35:25 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
-	int letter, int xy[2])
-{
-	if (map_file[letter] == 'E')
-	{
-		mlx_image_to_window(s_stuff->window, s_stuff->exit, xy[0], xy[1]);
-		s_stuff->exit->instances->enabled = false;
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	when_player(char *map_file, struct s_mlx_stuff *s_stuff,
-	int letter, int xy[2])
-{
-	if (map_file[letter] == 'P')
-	{
-		s_stuff->player_x = xy[0];
-		s_stuff->player_y = xy[1] + 40;
-	}
-	return (EXIT_SUCCESS);
-}
-
-void	print_moves(int *moves)
+static void	print_moves(int *moves)
 {
 	*moves += 1;
 	ft_printf("player moves: %d\n", *moves);
+}
+
+static void	player_win(struct s_mlx_stuff *s_stuff)
+{
+	if (s_stuff->player->instances->x == s_stuff->exit->instances->x
+		&& s_stuff->player->instances->y - 40 == s_stuff->exit->instances->y)
+	{
+		s_stuff->victory_ending = true;
+		mlx_close_window(s_stuff->window);
+	}
+}
+
+static void	check_if_touching_collectible(int player_x, int player_y,
+		mlx_image_t *collectible_image)
+{
+	size_t	pos;
+
+	pos = -1;
+	while (collectible_image->count > ++pos)
+	{
+		if (player_x == collectible_image->instances[pos].x && player_y -40
+			== collectible_image->instances[pos].y)
+		{
+			collectible_image->instances[pos].enabled = false;
+		}
+	}
+}
+
+static bool	check_if_all_collectibles_are_gone(mlx_image_t *collectible_image)
+{
+	size_t	pos;
+
+	pos = -1;
+	while (collectible_image->count > ++pos)
+	{
+		if (collectible_image->instances[pos].enabled == true)
+		{
+			return (false);
+		}
+	}
+	return (true);
 }
 
 void	move_player(struct s_mlx_stuff *s_stuff, int direction)
@@ -66,28 +85,4 @@ void	move_player(struct s_mlx_stuff *s_stuff, int direction)
 		player_win(s_stuff);
 	}
 	print_moves(&s_stuff->moves);
-}
-
-void	display_moves(struct s_mlx_stuff *s_stuff, int direction)
-{
-	static mlx_image_t	*image_of_moves;
-	char				*itoa_moves;
-
-	if (image_of_moves != NULL)
-		image_of_moves->instances->enabled = false;
-	mlx_delete_image(s_stuff->window, image_of_moves);
-	if (direction == UP)
-		move_player(s_stuff, UP);
-	if (direction == DOWN)
-		move_player(s_stuff, DOWN);
-	if (direction == LEFT)
-		move_player(s_stuff, LEFT);
-	if (direction == RIGHT)
-		move_player(s_stuff, RIGHT);
-	itoa_moves = ft_itoa(s_stuff->moves);
-	image_of_moves = mlx_put_string(s_stuff->window, (const char *)itoa_moves,
-			80, 0);
-	if (itoa_moves)
-		free (itoa_moves);
-	move_enemy(s_stuff);
 }
