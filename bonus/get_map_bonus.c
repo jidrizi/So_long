@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:38:53 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 17:43:36 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 17:45:49 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
 		mlx_image_to_window(s_stuff->window, s_stuff->exit, xy[0], xy[1]);
 		s_stuff->exit->instances->enabled = false;
 		mlx_image_to_window(s_stuff->window, s_stuff->enemy,
-		s_stuff->collectible->instances[0].x,
-		s_stuff->collectible->instances[0].y);
+			s_stuff->collectible->instances[0].x,
+			s_stuff->collectible->instances[0].y);
 	}
 	return (EXIT_SUCCESS);
 }
