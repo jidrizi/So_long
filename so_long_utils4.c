@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 20:34:46 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/01 20:01:23 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:13:08 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_moves(int *moves)
 	ft_printf("player moves: %d\n", *moves);
 }
 
-void	 move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
+void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 {
 	int	player_x;
 	int	player_y;
@@ -67,4 +67,3 @@ void	 move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 	}
 	print_moves(moves);
 }
-
