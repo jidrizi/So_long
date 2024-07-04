@@ -6,7 +6,7 @@
 #    By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 13:16:12 by jidrizi           #+#    #+#              #
-#    Updated: 2024/07/04 17:31:19 by jidrizi          ###   ########.fr        #
+#    Updated: 2024/07/04 22:11:09 by jidrizi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ clean:
 	@echo "washing my balls rn"
 
 fclean: clean
-	@git submodule deinit -f --all
 	@rm -f $(NAME)
 	@rm -f $(NAME_BONUS)
 	@echo "dont forget to clean your 4skin"

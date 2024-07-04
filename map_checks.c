@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:01:48 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 20:32:08 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 22:24:37 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ int	wall_frame_check(char *map_file)
 
 	letters = -1;
 	len = ft_strlen(map_file);
-	while (map_file[letters] && map_file[-letters] != '\n')
+	while (map_file[++letters] && map_file[letters] != '\n')
 		if (map_file[letters] != '1')
 			return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
 	if (map_file[++letters] != '1')
 		return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
-	while (map_file[letters++] < len)
+	if (check_if_endline_of_map_is_framed(map_file, len) == EXIT_FAILURE)
+		return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
+	while (letters++ < len - 1)
 	{
-		if (map_file[letters] == '\n')
+		if (map_file[letters] == '\n' && map_file[letters + 1] != '\0')
 		{
 			if (map_file[letters + 1] != '1' || map_file[letters - 1] != '1')
 				return (ft_printf("Error\nMap has no wall frame\n"), 1);
 		}
 	}
-	if (check_if_endline_of_map_is_framed(map_file, len) == EXIT_FAILURE)
-		return (ft_printf("Error\nMap has no wall frame\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

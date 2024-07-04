@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:03:42 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 20:25:48 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 21:56:40 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	costum_free(void **ptr)
 
 int	check_if_endline_of_map_is_framed(char *map_file, int len)
 {
-	if (map_file[len] == '\n' && map_file[len + 1] == '\0')
-		return (EXIT_SUCCESS);
+	if (map_file[len - 1] == '\n')
+		len--;
 	while (map_file[--len] != '\n')
 	{
 		if (map_file[len] != '1')
