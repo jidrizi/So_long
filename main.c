@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 18:42:50 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 21:13:45 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ static int	*finder_of_width_height(char *map_file)
 	while (map_file[pos])
 	{
 		if (map_file[pos] == '\n')
+		{
+			if (map_file[pos + 1] == '\0')
+				break ;
 			height++;
+		}
 		pos++;
 	}
 	height = height * 100;
