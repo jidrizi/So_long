@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 15:23:18 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:45:35 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,11 @@ static int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	mlx_terminate(s_stuff->window);
 	return (costum_free((void **)&map), 0);
 }
-void	leaks(void)
-{
-	system("leaks so_long");
-}
 
 int	main(int argc, char *argv[])
 {
 	struct s_mlx_stuff	*s_stuff;
 
-	atexit(&leaks);
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (check_ber(argv[1]))
