@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils3.c                                   :+:      :+:    :+:   */
+/*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/06/30 14:40:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:13:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*create_proper_reference(char *current_line, char *reference, int fd)
+//i[0] = the x axis and i[1] = the y axis
+void	put_png_in_map(char *map_file, mlx_t *window_file,
+		struct s_mlx_stuff *s_stuff)
 {
-	char	*temp_reference;
+	int	letter;
+	int	i[2];
 
-	temp_reference = NULL;
-	while (current_line)
+	i[0] = 0;
+	i[1] = 0;
+	letter = -1;
+	while (map_file[++letter])
 	{
-		temp_reference = reference;
-		reference = ft_strjoin(temp_reference, current_line);
-		costum_free((void **)&current_line);
-		costum_free((void **)&temp_reference);
-		if (!reference)
-			return (NULL);
-		current_line = get_next_line(fd);
+		mlx_image_to_window(window_file, s_stuff->floor, i[0], i[1]);
+		if (map_file[letter] == '1')
+			mlx_image_to_window(window_file, s_stuff->wall, i[0], i[1]);
+		if (map_file[letter] == 'C')
+			mlx_image_to_window(window_file, s_stuff->collectible, i[0], i[1]);
+		when_exit(map_file, s_stuff, letter, i);
+		when_player(map_file, s_stuff, letter, i);
+		i[0] = i[0] + 100;
+		if (map_file[letter] == '\n')
+		{
+			i[0] = 0;
+			i[1] = i[1] + 100;
+		}
 	}
-	return (reference);
-}
-
-int	check_if_endline_of_map_is_framed(char *map_file, int len)
-{
-	while (map_file[--len] != '\n')
-	{
-		if (map_file[len] != '1')
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	s_stuff->player = print_player(window_file, s_stuff->player_x,
+			s_stuff->player_y, PLAYER_PATH);
 }
 
 void	make_image(struct s_mlx_stuff *s_stuff)
@@ -56,16 +58,6 @@ void	make_image(struct s_mlx_stuff *s_stuff)
 	mlx_delete_texture(s_stuff->floor_texture);
 }
 
-int	check_and_flag(char *map_duplicate, int x)
-{
-	if (map_duplicate[x] != '1')
-	{
-		map_duplicate[x] = '1';
-		return (EXIT_SUCCESS);
-	}
-	return (EXIT_FAILURE);
-}
-
 void	make_textures(struct s_mlx_stuff *s_stuff)
 {
 	s_stuff->wall_texture = mlx_load_png(WALL_PATH);
@@ -73,3 +65,6 @@ void	make_textures(struct s_mlx_stuff *s_stuff)
 	s_stuff->exit_texture = mlx_load_png(EXIT_PATH);
 	s_stuff->floor_texture = mlx_load_png(FLOOR_PATH);
 }
+
+
+

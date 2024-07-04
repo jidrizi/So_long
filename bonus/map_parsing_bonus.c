@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:01:32 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 15:41:39 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:25:53 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	wall_frame_check(char *map_file)
 	int	letters;
 	int	len;
 
-	letters = 0;
+	letters = -1;
 	len = ft_strlen(map_file);
 	while (map_file[letters] && map_file[++letters] != '\n')
 		if (map_file[letters] != '1')

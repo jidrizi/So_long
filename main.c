@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 16:16:15 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:37:25 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_ber(char *arg1)
+static int	check_ber(char *arg1)
 {
 	int	len;
 	int	dif;
@@ -33,29 +33,49 @@ int	check_ber(char *arg1)
 	return (EXIT_SUCCESS);
 }
 
-char	*get_map(char *arg1)
+static char	*get_map(char *arg1)
 {
 	int		fd;
-	char	*reference;
+	char	*map;
 	char	*current_line;
+
 
 	fd = open(arg1, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf("Error\nSomething wrong with map file\n");
-		return (NULL);
-	}
-	reference = NULL;
+		return (ft_printf("Error\nSomething wrong with map file\n"), NULL);
+	map = NULL;
 	current_line = get_next_line(fd);
-	reference = create_proper_reference(current_line, reference, fd);
-	if (check_if_missing_element(reference) == EXIT_FAILURE)
-		return (costum_free((void **)&reference), close (fd), NULL);
-	if (check_ep_duplicates(reference))
-		return (costum_free((void **)&reference), close(fd), NULL);
-	return (close(fd), reference);
+	map = fill_map_str(current_line, map, fd);
+	if (!map)
+		return (close(fd), NULL);
+	if (check_map_elements(map) == EXIT_FAILURE)
+		return (costum_free((void **)&map), close(fd), NULL);
+	return (close(fd), map);
+}
+static int	*finder_of_width_height(char *map_file)
+{
+	int	width;
+	int	pos;
+	int	height;
+
+	width = 0;
+	height = 0;
+	while (map_file[width] != '\n')
+		width++;
+	height++;
+	pos = width;
+	while (map_file[pos])
+	{
+		if (map_file[pos] == '\n')
+			height++;
+		pos++;
+	}
+	height = height * 100;
+	width = width * 100;
+	return ((int [2]){width, height});
 }
 
-int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
+static int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 {
 	char	*map;
 	int		*for_window;
@@ -84,13 +104,7 @@ int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	return (costum_free((void **)&map), 0);
 }
 
-static void	victory_hook(mlx_key_data_t keydata, void *param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		mlx_close_window((mlx_t *)param);
-	}
-}
+
 
 int	main(int argc, char *argv[])
 {
