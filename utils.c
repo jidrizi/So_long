@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:03:42 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 17:07:23 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:45:31 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	get_size_first_line(char *map_file)
 	}
 	return (size_of_first_line);
 }
+
 void	costum_free(void **ptr)
 {
 	if (ptr == NULL)
@@ -32,6 +33,7 @@ void	costum_free(void **ptr)
 		free(*ptr);
 	*ptr = NULL;
 }
+
 int	check_if_endline_of_map_is_framed(char *map_file, int len)
 {
 	while (map_file[--len] != '\n')
@@ -41,6 +43,7 @@ int	check_if_endline_of_map_is_framed(char *map_file, int len)
 	}
 	return (EXIT_SUCCESS);
 }
+
 char	*fill_map_str(char *current_line, char *map_file, int fd)
 {
 	char	*temp_line;

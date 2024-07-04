@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:04:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 17:13:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:44:37 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,13 @@ void	make_textures(struct s_mlx_stuff *s_stuff)
 	s_stuff->floor_texture = mlx_load_png(FLOOR_PATH);
 }
 
-
-
+int	when_player(char *map_file, struct s_mlx_stuff *s_stuff,
+	int letter, int xy[2])
+{
+	if (map_file[letter] == 'P')
+	{
+		s_stuff->player_x = xy[0];
+		s_stuff->player_y = xy[1];
+	}
+	return (EXIT_SUCCESS);
+}

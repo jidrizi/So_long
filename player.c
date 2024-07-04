@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:10:28 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 17:28:32 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:45:05 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,9 @@ void	move_player(struct s_mlx_stuff *s_stuff, int *moves, int direction)
 	print_moves(moves);
 }
 
+//no where else to put it
 void	print_moves(int *moves)
 {
 	*moves += 1;
 	ft_printf("player moves: %d\n", *moves);
-}
-int	when_player(char *map_file, struct s_mlx_stuff *s_stuff,
-	int letter, int xy[2])
-{
-	if (map_file[letter] == 'P')
-	{
-		s_stuff->player_x = xy[0];
-		s_stuff->player_y = xy[1];
-	}
-	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:55:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 18:37:21 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:42:27 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	get_size_first_line(char *map_file)
 	}
 	return (size_of_first_line);
 }
-int check_if_invalid_char(char *map_file)
+
+int	check_if_invalid_char(char *map_file)
 {
 	char	*check_if_invalid_char;
 

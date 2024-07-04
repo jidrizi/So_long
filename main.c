@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 17:37:25 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:42:50 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char	*get_map(char *arg1)
 	char	*map;
 	char	*current_line;
 
-
 	fd = open(arg1, O_RDONLY);
 	if (fd == -1)
 		return (ft_printf("Error\nSomething wrong with map file\n"), NULL);
@@ -52,6 +51,7 @@ static char	*get_map(char *arg1)
 		return (costum_free((void **)&map), close(fd), NULL);
 	return (close(fd), map);
 }
+
 static int	*finder_of_width_height(char *map_file)
 {
 	int	width;
@@ -103,8 +103,6 @@ static int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	mlx_terminate(s_stuff->window);
 	return (costum_free((void **)&map), 0);
 }
-
-
 
 int	main(int argc, char *argv[])
 {

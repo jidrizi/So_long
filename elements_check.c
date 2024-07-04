@@ -6,11 +6,12 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:37:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 17:38:59 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:42:39 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 static int	check_if_missing_element(char *reference)
 {
 	if (!ft_strchr(reference, 'P') || !ft_strchr(reference, 'E')
@@ -21,6 +22,7 @@ static int	check_if_missing_element(char *reference)
 	}
 	return (EXIT_SUCCESS);
 }
+
 static int	check_ep_duplicates(char *map_file)
 {
 	int	p;
@@ -46,7 +48,7 @@ static int	check_ep_duplicates(char *map_file)
 	return (EXIT_SUCCESS);
 }
 
-int check_map_elements(char *map_file)
+int	check_map_elements(char *map_file)
 {
 	char	*check_if_invalid_char;
 
