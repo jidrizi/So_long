@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 17:34:11 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:23:18 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,16 @@ static int	put_window(char *arg1, struct s_mlx_stuff *s_stuff)
 	mlx_terminate(s_stuff->window);
 	return (costum_free((void **)&map), 0);
 }
+void	leaks(void)
+{
+	system("leaks so_long");
+}
 
 int	main(int argc, char *argv[])
 {
 	struct s_mlx_stuff	*s_stuff;
 
+	atexit(&leaks);
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (check_ber(argv[1]))
@@ -96,9 +101,9 @@ int	main(int argc, char *argv[])
 	if (!s_stuff)
 		return (EXIT_FAILURE);
 	if (put_window(argv[1], s_stuff) == 1)
-		return (EXIT_FAILURE);
+		return (costum_free((void **)&s_stuff), EXIT_FAILURE);
 	if (s_stuff->victory_ending == false)
-		return ((costum_free((void **)&s_stuff), 0));
+		return (make_defeat_window(), (costum_free((void **)&s_stuff), 0));
 	make_victory_window();
 	return (costum_free((void **)&s_stuff), 0);
 }
