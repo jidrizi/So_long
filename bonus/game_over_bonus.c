@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:07:11 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 16:11:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 18:43:44 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	victory_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-static void	make_defeat_window(void)
+void	make_defeat_window(void)
 {
 	mlx_t			*defeat_window;
 	mlx_texture_t	*defeat_texture;
@@ -61,6 +61,5 @@ void	check_defeat_condition(void *param)
 		&& s_stuff->player->instances->y == s_stuff->enemy->instances->y + 40)
 	{
 		mlx_close_window(s_stuff->window);
-		make_defeat_window();
 	}
 }

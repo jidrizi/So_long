@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:53:55 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 16:28:48 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/03 18:44:01 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ int				get_size_first_line(char *map_file);
 int				when_exit(char *map_file, struct s_mlx_stuff *s_stuff,
 					int letter, int xy[2]);
 void			check_defeat_condition(void *param);
+void			make_defeat_window(void);
 #endif
