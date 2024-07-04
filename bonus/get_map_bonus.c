@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:38:53 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/03 17:45:49 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:39:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ char	*get_map(char *arg1)
 		return (NULL);
 	}
 	map = make_map_str(fd);
+	if (!map)
+		return (NULL);
 	close(fd);
+	if (check_if_invalid_char(map) == EXIT_FAILURE)
+		return (costum_free((void **)&map), NULL);
 	if (check_if_missing_element(map) == EXIT_FAILURE)
 		return (costum_free((void **)&map), NULL);
 	if (check_ep_duplicates(map))
