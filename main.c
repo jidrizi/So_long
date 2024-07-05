@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 21:13:45 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/05 18:53:36 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static char	*get_map(char *arg1)
 		return (ft_printf("Error\nSomething wrong with map file\n"), NULL);
 	map = NULL;
 	current_line = get_next_line(fd);
+	if (!current_line)
+		return (ft_printf("Error\nMap is empty"), close(fd), NULL);
 	map = fill_map_str(current_line, map, fd);
 	if (!map)
 		return (close(fd), NULL);
@@ -116,7 +118,7 @@ int	main(int argc, char *argv[])
 	struct s_mlx_stuff	*s_stuff;
 
 	if (argc != 2)
-		return (EXIT_FAILURE);
+		return (ft_printf("Error\nNo more or less than 2 args"), EXIT_FAILURE);
 	if (check_ber(argv[1]))
 		return (EXIT_FAILURE);
 	s_stuff = ft_calloc(sizeof(struct s_mlx_stuff), 1);

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:38:53 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/04 18:39:47 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/07/05 18:54:17 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*make_map_str(int fd)
 	map = NULL;
 	current_line = get_next_line(fd);
 	if (!current_line)
-		return (NULL);
+		return (ft_printf("Error\nMap is empty"), close(fd), NULL);
 	tmp_map_line = NULL;
 	while (current_line)
 	{
