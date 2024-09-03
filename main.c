@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:56:34 by jidrizi           #+#    #+#             */
-/*   Updated: 2024/07/05 18:53:36 by jidrizi          ###   ########.fr       */
+/*   Updated: 2024/09/03 15:17:02 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	main(int argc, char *argv[])
 	if (!s_stuff)
 		return (EXIT_FAILURE);
 	if (put_window(argv[1], s_stuff) == 1)
-		return (EXIT_FAILURE);
+		return (costum_free((void **)&s_stuff), EXIT_FAILURE);
 	if (s_stuff->victory_ending == false)
 		return ((costum_free((void **)&s_stuff), 0));
 	victory_window = mlx_init(2000, 2000, "VICTORY", true);
